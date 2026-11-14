@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://by7j03igxkmx8"]
+
+[ext_resource type="Script" uid="uid://qf1ergsb8pai" path="res://menu.gd" id="1_lti8b"]
+
+[sub_resource type="GDScript" id="GDScript_5wfv7"]
+script/source = "extends Node
+
+var failures : int = 0
+"
+
+[node name="Node2D" type="Node2D" unique_id=1357228171]
+rotation = -0.0032296565
+script = ExtResource("1_lti8b")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=539137796]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=241347718]
+offset_left = 859.0
+offset_top = 278.0
+offset_right = 938.0
+offset_bottom = 301.0
+text = "Failures: 0"
+script = SubResource("GDScript_5wfv7")
+
+[node name="Control" type="Control" parent="." unique_id=327519560]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="Control" unique_id=312785559]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.393
+anchor_top = 7.175
+anchor_right = 30.068
+anchor_bottom = 18.547
+offset_left = 675.8616
+offset_top = 153.36502
+offset_right = -302.13824
+offset_bottom = -230.51498
+scale = Vector2(1.48, 1.48)
+text = "Initiate Mission"
+
+[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]

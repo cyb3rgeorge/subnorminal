@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bv66xpmy23g1c" path="res://images/ship0.png" id="9_uxuuy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5wfv7"]
-size = Vector2(1950, 100)
+size = Vector2(32478, 100)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4y73a"]
 bg_color = Color(0.39215687, 0.39215687, 0.39215687, 1)
@@ -45,13 +45,13 @@ corner_radius_bottom_left = 8
 [node name="Node2D" type="Node2D" unique_id=1745848919]
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=326992581]
-position = Vector2(927.99994, 1078)
-scale = Vector2(15.781249, 1)
+position = Vector2(1125.501, 1078)
+scale = Vector2(251.03906, 1)
 texture = ExtResource("5_xf4yl")
 
 [node name="Starship" type="RigidBody2D" parent="." unique_id=1724685367]
-position = Vector2(960, 87)
-mass = 10.0
+position = Vector2(960, -3068)
+rotation = 1.176179
 inertia = 1000.0
 can_sleep = false
 freeze_mode = 1
@@ -76,7 +76,7 @@ script = ExtResource("4_dfdgy")
 position = Vector2(-10, 1120)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Land" unique_id=333878887]
-position = Vector2(965, -40)
+position = Vector2(970, -40)
 shape = SubResource("RectangleShape2D_5wfv7")
 
 [node name="Telemetry" type="CanvasLayer" parent="." unique_id=65945142]
@@ -100,7 +100,7 @@ offset_right = -138.36002
 offset_bottom = -382.24005
 theme_override_styles/background = SubResource("StyleBoxFlat_4y73a")
 theme_override_styles/fill = SubResource("StyleBoxFlat_7rytq")
-max_value = 1000.0
+max_value = 2000.0
 value = 1000.0
 allow_greater = true
 show_percentage = false
@@ -168,7 +168,12 @@ position = Vector2(140, 275)
 texture = ExtResource("8_kvxyv")
 
 [node name="0Engines" type="Sprite2D" parent="Telemetry" unique_id=1219415110]
+visible = false
 position = Vector2(140, 275)
 texture = ExtResource("9_uxuuy")
 
+[node name="EndTimer" type="Timer" parent="." unique_id=86791372]
+wait_time = 2.0
+
 [connection signal="body_entered" from="Land" to="Starship" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="EndTimer" to="Starship" method="_on_end_timer_timeout"]

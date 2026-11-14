@@ -3,38 +3,45 @@ extends RigidBody2D
 class_name Starship
 
 # Telemetry
-signal failsTelemetry
 signal propTelemetry
 signal throttleTelemetry
-signal enginesTelemetry
-signal xTelemetry
-signal yTelemetry
 
-@export var fails = 0
-@export var maxProp = 1000
+@export var maxProp = 2000
 @export var prop = maxProp
 @export var throttle = 0
 @export var engines = 0
+@export var dryMass = 100000
 
 # Corrections
 const altitudeCorrection = 964
 const targetOffsetCorrection = 960
 
 # Specs
-var power = 100
-var angularPower = 100
+var power = 330000
+var angularPower = 500
 
 var thrust = Vector2.ZERO
 var rotationalDirection = 0
 
-# Atmospheric Conditions
-const drag = 100
+# Drag
+const dragSkirtC : float = 1.2
+const dragBellyC : float = 1.2
+const dragNoseC : float = 0.5
+const skirtArea = 64
+const bellyArea = 500
+const noseArea = 50
+const rho = 1.2250
+
+const CQ12 = (1 * dragSkirtC + 4 * dragBellyC)/5
+const CQ34 = (1 * dragNoseC + 4 * dragBellyC)/5
+const AQ12 = (1 * skirtArea + 4 * bellyArea)/5
+const AQ34 = (1 * noseArea + 4 * bellyArea)/5
 
 # Telemetry (Velocity and Speed)
 var previous_position: Vector2
 func _ready() -> void:
+	mass = dryMass
 	previous_position = global_position
-
 
 func get_input():
 	thrust = Vector2.ZERO
@@ -42,17 +49,13 @@ func get_input():
 	
 	if Input.is_action_pressed("EngineCutoff"):
 		engines = 0
-		enginesTelemetry.emit()
 	if Input.is_action_pressed("1Engine"):
 		engines = 1
-		enginesTelemetry.emit()
 	if Input.is_action_pressed("2Engines"):
 		engines = 2
-		enginesTelemetry.emit()
 	if Input.is_action_pressed("3Engines"):
 		engines = 3
-		enginesTelemetry.emit()
-		
+	
 	if Input.is_action_pressed("throttleUp"):
 		throttle = throttle + 1
 		throttleTelemetry.emit()
@@ -92,17 +95,34 @@ func _physics_process (delta):
 	$"../Telemetry/Control/Velocity".text = "Velocity: " + str(velocity)
 	$"../Telemetry/Control/Speed".text = "Speed: " + str(speed)
 	
-	print("Rotation: ", rotationalDirection)
-	print("Throttle: ", throttle)
-	print(engines, " Engines")
-	print("Prop: ", prop)
-	print("x: ", targetOffset)
-	print("y: ", altitude)
-	print("Velocity: ", velocity)
-	print("Speed: ", speed)
+	var orientation = Vector2(cos(rotation), sin(rotation)) 
+	# print(orientation)
+	if orientation.x >= 0:
+		var dragCoefficent = CQ12
+		var dragArea = AQ12
+	else:
+		var dragCoefficent = CQ34
+		var dragArea = AQ34
+		
+	var dragForce = 0.5 * CQ12 * rho * AQ12 * linear_velocity.y ** 2
+	var dragDirection = -sign(linear_velocity.y)
+	apply_central_force(Vector2(0, dragForce * dragDirection))
+	
+	# print(dragForce)
+	# print("Rotation: ", rotationalDirection)
+	# print("Throttle: ", throttle)
+	# print(engines, " Engines")
+	# print("Prop: ", prop)
+	# print("x: ", targetOffset)
+	# print("y: ", altitude)
+	# print("Velocity: ", velocity)
+	# print("Speed: ", speed)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == self:
 		set_deferred("freeze", true)
-		fails = fails + 1
-		failsTelemetry.emit()
+		Global.failures = Global.failures + 1
+		$"../EndTimer".start()
+		
+func _on_end_timer_timeout() -> void:
+	get_tree().change_scene_to_file("res://menu.tscn")
