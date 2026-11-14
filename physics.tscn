@@ -79,15 +79,15 @@ position = Vector2(-10, 1120)
 position = Vector2(965, -40)
 shape = SubResource("RectangleShape2D_5wfv7")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=65945142]
+[node name="Telemetry" type="CanvasLayer" parent="." unique_id=65945142]
 
-[node name="Control" type="Control" parent="CanvasLayer" unique_id=645980651]
+[node name="Control" type="Control" parent="Telemetry" unique_id=645980651]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="PropGauge" type="ProgressBar" parent="CanvasLayer/Control" unique_id=498435802 node_paths=PackedStringArray("starship")]
+[node name="PropGauge" type="ProgressBar" parent="Telemetry/Control" unique_id=498435802 node_paths=PackedStringArray("starship")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.1
@@ -108,7 +108,7 @@ script = ExtResource("3_hk0ex")
 starship = NodePath("../../../Starship")
 metadata/_edit_use_anchors_ = true
 
-[node name="Throttle" type="ProgressBar" parent="CanvasLayer/Control" unique_id=1988183089 node_paths=PackedStringArray("starship")]
+[node name="Throttle" type="ProgressBar" parent="Telemetry/Control" unique_id=1988183089 node_paths=PackedStringArray("starship")]
 layout_mode = 1
 offset_left = 40.0
 offset_top = 110.0
@@ -120,7 +120,7 @@ show_percentage = false
 script = ExtResource("4_htxsa")
 starship = NodePath("../../../Starship")
 
-[node name="Altimeter" type="Label" parent="CanvasLayer/Control" unique_id=389722824]
+[node name="Altimeter" type="Label" parent="Telemetry/Control" unique_id=389722824]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 410.0
@@ -128,7 +128,7 @@ offset_right = 361.0
 offset_bottom = 433.0
 text = "Altitude: Standby for Acquisition of Signal"
 
-[node name="TargetOffset" type="Label" parent="CanvasLayer/Control" unique_id=874698171]
+[node name="TargetOffset" type="Label" parent="Telemetry/Control" unique_id=874698171]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 440.0
@@ -136,7 +136,7 @@ offset_right = 361.0
 offset_bottom = 463.0
 text = "Target Offset: Standby for Acquisition of Signal"
 
-[node name="Velocity" type="Label" parent="CanvasLayer/Control" unique_id=258425340]
+[node name="Velocity" type="Label" parent="Telemetry/Control" unique_id=258425340]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 470.0
@@ -144,7 +144,7 @@ offset_right = 400.0
 offset_bottom = 493.0
 text = "Velocity: Standby for Acquisition of Signal"
 
-[node name="Speed" type="Label" parent="CanvasLayer/Control" unique_id=1969566577]
+[node name="Speed" type="Label" parent="Telemetry/Control" unique_id=1969566577]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 503.0
@@ -152,22 +152,22 @@ offset_right = 400.0
 offset_bottom = 526.0
 text = "Speed: Standby for Acquisition of Signal"
 
-[node name="3Engines" type="Sprite2D" parent="CanvasLayer" unique_id=968264892]
+[node name="3Engines" type="Sprite2D" parent="Telemetry" unique_id=968264892]
+visible = false
 position = Vector2(140, 275)
 texture = ExtResource("6_3542s")
 
-[node name="2Engines" type="Sprite2D" parent="CanvasLayer" unique_id=2016750725]
+[node name="2Engines" type="Sprite2D" parent="Telemetry" unique_id=2016750725]
 visible = false
 position = Vector2(140, 275)
 texture = ExtResource("7_dfdgy")
 
-[node name="1Engine" type="Sprite2D" parent="CanvasLayer" unique_id=2108164887]
+[node name="1Engines" type="Sprite2D" parent="Telemetry" unique_id=2108164887]
 visible = false
 position = Vector2(140, 275)
 texture = ExtResource("8_kvxyv")
 
-[node name="0Engines" type="Sprite2D" parent="CanvasLayer" unique_id=1219415110]
-visible = false
+[node name="0Engines" type="Sprite2D" parent="Telemetry" unique_id=1219415110]
 position = Vector2(140, 275)
 texture = ExtResource("9_uxuuy")
 

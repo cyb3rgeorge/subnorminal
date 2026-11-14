@@ -56,7 +56,6 @@ func get_input():
 	if Input.is_action_pressed("throttleUp"):
 		throttle = throttle + 1
 		throttleTelemetry.emit()
-		
 	if Input.is_action_pressed("throttleDown"):
 		throttle = throttle -1
 		throttleTelemetry.emit()
@@ -70,32 +69,9 @@ func get_input():
 		throttle = 0
 	if throttle > 100:
 		throttle = 100
-		
-	if engines == 0:
-		$"../CanvasLayer/0Engines".visible = true
-		$"../CanvasLayer/1Engine".visible = false
-		$"../CanvasLayer/2Engines".visible = false
-		$"../CanvasLayer/3Engines".visible = false
-	elif engines == 1:
-		$"../CanvasLayer/0Engines".visible = false
-		$"../CanvasLayer/1Engine".visible = true
-		$"../CanvasLayer/2Engines".visible = false
-		$"../CanvasLayer/3Engines".visible = false
-	elif engines == 2:
-		$"../CanvasLayer/0Engines".visible = false
-		$"../CanvasLayer/1Engine".visible = false
-		$"../CanvasLayer/2Engines".visible = true
-		$"../CanvasLayer/3Engines".visible = false
-	elif engines == 3:
-		$"../CanvasLayer/0Engines".visible = false
-		$"../CanvasLayer/1Engine".visible = false
-		$"../CanvasLayer/2Engines".visible = false
-		$"../CanvasLayer/3Engines".visible = true
-	else:
-		$"../CanvasLayer/0Engines".visible = true
-		$"../CanvasLayer/1Engine".visible = false
-		$"../CanvasLayer/2Engines".visible = false
-		$"../CanvasLayer/3Engines".visible = false
+	
+	for i in range(4):
+		$"../Telemetry".get_node(str(i) + "Engines").visible = (engines == i)
 
 func _physics_process (delta):
 	get_input()
@@ -111,10 +87,10 @@ func _physics_process (delta):
 	var speed = round(velocityComplete.length()) # units per second
 	previous_position = global_position
 	
-	$"../CanvasLayer/Control/Altimeter".text = "Altitude: " + str(-altitude + altitudeCorrection)
-	$"../CanvasLayer/Control/TargetOffset".text = "Target Offset: " + str(targetOffset - targetOffsetCorrection)
-	$"../CanvasLayer/Control/Velocity".text = "Velocity: " + str(velocity)
-	$"../CanvasLayer/Control/Speed".text = "Speed: " + str(speed)
+	$"../Telemetry/Control/Altimeter".text = "Altitude: " + str(-altitude + altitudeCorrection)
+	$"../Telemetry/Control/TargetOffset".text = "Target Offset: " + str(targetOffset - targetOffsetCorrection)
+	$"../Telemetry/Control/Velocity".text = "Velocity: " + str(velocity)
+	$"../Telemetry/Control/Speed".text = "Speed: " + str(speed)
 	
 	print("Rotation: ", rotationalDirection)
 	print("Throttle: ", throttle)
