@@ -23,20 +23,6 @@ var angularPower = 500
 var thrust = Vector2.ZERO
 var rotationalDirection = 0
 
-# Drag
-const dragSkirtC : float = 1.2
-const dragBellyC : float = 1.2
-const dragNoseC : float = 0.5
-const skirtArea = 64
-const bellyArea = 500
-const noseArea = 50
-const rho = 1.2250
-
-const CQ12 = (1 * dragSkirtC + 4 * dragBellyC)/5
-const CQ34 = (1 * dragNoseC + 4 * dragBellyC)/5
-const AQ12 = (1 * skirtArea + 4 * bellyArea)/5
-const AQ34 = (1 * noseArea + 4 * bellyArea)/5
-
 # Telemetry (Velocity and Speed)
 var previous_position: Vector2
 func _ready() -> void:
@@ -90,23 +76,18 @@ func _physics_process (delta):
 	var speed = round(velocityComplete.length()) # units per second
 	previous_position = global_position
 	
+	var orientation = Vector2(cos(rotation), sin(rotation)) 
+	# print(orientation)
+
+	var dragForce = abs(orientation.x) * 441 * linear_velocity.y ** 2
+	var dragDirection = -sign(linear_velocity.y)
+	apply_central_force(Vector2(0, dragForce * dragDirection))
+	
 	$"../Telemetry/Control/Altimeter".text = "Altitude: " + str(-altitude + altitudeCorrection)
 	$"../Telemetry/Control/TargetOffset".text = "Target Offset: " + str(targetOffset - targetOffsetCorrection)
 	$"../Telemetry/Control/Velocity".text = "Velocity: " + str(velocity)
 	$"../Telemetry/Control/Speed".text = "Speed: " + str(speed)
-	
-	var orientation = Vector2(cos(rotation), sin(rotation)) 
-	# print(orientation)
-	if orientation.x >= 0:
-		var dragCoefficent = CQ12
-		var dragArea = AQ12
-	else:
-		var dragCoefficent = CQ34
-		var dragArea = AQ34
-		
-	var dragForce = 0.5 * CQ12 * rho * AQ12 * linear_velocity.y ** 2
-	var dragDirection = -sign(linear_velocity.y)
-	apply_central_force(Vector2(0, dragForce * dragDirection))
+	$"../Telemetry/Control/DragForce".text = "Drag Force: " +str(round(dragForce))
 	
 	# print(dragForce)
 	# print("Rotation: ", rotationalDirection)

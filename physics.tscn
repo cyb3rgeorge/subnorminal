@@ -147,10 +147,18 @@ text = "Velocity: Standby for Acquisition of Signal"
 [node name="Speed" type="Label" parent="Telemetry/Control" unique_id=1969566577]
 layout_mode = 0
 offset_left = 40.0
-offset_top = 503.0
+offset_top = 500.0
 offset_right = 400.0
-offset_bottom = 526.0
+offset_bottom = 523.0
 text = "Speed: Standby for Acquisition of Signal"
+
+[node name="DragForce" type="Label" parent="Telemetry/Control" unique_id=1794164637]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 530.0
+offset_right = 400.0
+offset_bottom = 553.0
+text = "Drag Force: Standby for Acquisition of Signal"
 
 [node name="3Engines" type="Sprite2D" parent="Telemetry" unique_id=968264892]
 visible = false
