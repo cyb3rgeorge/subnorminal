@@ -3,13 +3,18 @@
 [ext_resource type="Texture2D" uid="uid://ddpdtrd0tbnna" path="res://images/hls.png" id="1_5ogd2"]
 [ext_resource type="Script" uid="uid://bw3qik1luvw6a" path="res://rigid_body_2d.gd" id="1_agxhv"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wfv7"]
+size = Vector2(1198, 100)
+
 [node name="Node2D" type="Node2D" unique_id=1745848919]
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=1724685367]
 position = Vector2(478, 193)
+gravity_scale = 0.8
 inertia = 1000.0
 can_sleep = false
-linear_damp = 1.0
+linear_damp = 2.0
+angular_damp = 1.0
 script = ExtResource("1_agxhv")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D" unique_id=92514545]
@@ -19,3 +24,12 @@ polygon = PackedVector2Array(1, -84, 4, -80, 10, -68, 13, -56, 14, -44, 15, 77, 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" unique_id=343599404]
 scale = Vector2(0.23636362, 0.23636363)
 texture = ExtResource("1_5ogd2")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1206827131]
+position = Vector2(0, 648)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=333878887]
+position = Vector2(589, -40)
+shape = SubResource("RectangleShape2D_5wfv7")
+
+[connection signal="body_entered" from="Area2D" to="RigidBody2D" method="_on_area_2d_body_entered"]
