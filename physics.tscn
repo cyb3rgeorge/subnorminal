@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bpewqquya7kue"]
+
+[ext_resource type="Texture2D" uid="uid://ddpdtrd0tbnna" path="res://images/hls.png" id="1_5ogd2"]
+[ext_resource type="Script" uid="uid://bw3qik1luvw6a" path="res://rigid_body_2d.gd" id="1_agxhv"]
+
+[node name="Node2D" type="Node2D" unique_id=1745848919]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=1724685367]
+position = Vector2(478, 193)
+inertia = 1000.0
+can_sleep = false
+linear_damp = 1.0
+script = ExtResource("1_agxhv")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D" unique_id=92514545]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(1, -84, 4, -80, 10, -68, 13, -56, 14, -44, 15, 77, -13, 77, -13, -46, -12, -56, -10, -64, -7, -72, -4, -78, -1, -83)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" unique_id=343599404]
+scale = Vector2(0.23636362, 0.23636363)
+texture = ExtResource("1_5ogd2")
