@@ -1,35 +1,174 @@
 [gd_scene format=3 uid="uid://bpewqquya7kue"]
 
 [ext_resource type="Texture2D" uid="uid://ddpdtrd0tbnna" path="res://images/hls.png" id="1_5ogd2"]
-[ext_resource type="Script" uid="uid://bw3qik1luvw6a" path="res://rigid_body_2d.gd" id="1_agxhv"]
+[ext_resource type="Script" uid="uid://bw3qik1luvw6a" path="res://starship.gd" id="1_agxhv"]
+[ext_resource type="Script" uid="uid://cx2qgefp2ad13" path="res://propGauge.gd" id="3_hk0ex"]
+[ext_resource type="Script" uid="uid://b1akmwma3e6rw" path="res://camera2d.gd" id="4_dfdgy"]
+[ext_resource type="Script" uid="uid://cg4gxkpa12mpb" path="res://throttle.gd" id="4_htxsa"]
+[ext_resource type="Texture2D" uid="uid://biqhk3b8fngfx" path="res://icon.svg" id="5_xf4yl"]
+[ext_resource type="Texture2D" uid="uid://caywmqxs4hsxs" path="res://images/ship3.png" id="6_3542s"]
+[ext_resource type="Texture2D" uid="uid://tmtv7bylagwc" path="res://images/ship2.png" id="7_dfdgy"]
+[ext_resource type="Texture2D" uid="uid://ccg11wl57j05n" path="res://images/ship1.png" id="8_kvxyv"]
+[ext_resource type="Texture2D" uid="uid://bv66xpmy23g1c" path="res://images/ship0.png" id="9_uxuuy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5wfv7"]
-size = Vector2(1198, 100)
+size = Vector2(1950, 100)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4y73a"]
+bg_color = Color(0.39215687, 0.39215687, 0.39215687, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rytq"]
+bg_color = Color(0.8666667, 0.8666667, 0.8666667, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xf4yl"]
+bg_color = Color(0.39215687, 0.39215687, 0.39215687, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vjvg7"]
+bg_color = Color(0.8666667, 0.8666667, 0.8666667, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="Node2D" type="Node2D" unique_id=1745848919]
 
-[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=1724685367]
-position = Vector2(478, 193)
-gravity_scale = 0.8
+[node name="Icon" type="Sprite2D" parent="." unique_id=326992581]
+position = Vector2(927.99994, 1078)
+scale = Vector2(15.781249, 1)
+texture = ExtResource("5_xf4yl")
+
+[node name="Starship" type="RigidBody2D" parent="." unique_id=1724685367]
+position = Vector2(960, 87)
+mass = 10.0
 inertia = 1000.0
 can_sleep = false
+freeze_mode = 1
 linear_damp = 2.0
 angular_damp = 1.0
 script = ExtResource("1_agxhv")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D" unique_id=92514545]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Starship" unique_id=92514545]
 position = Vector2(-1, 0)
 polygon = PackedVector2Array(1, -84, 4, -80, 10, -68, 13, -56, 14, -44, 15, 77, -13, 77, -13, -46, -12, -56, -10, -64, -7, -72, -4, -78, -1, -83)
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" unique_id=343599404]
+[node name="Sprite2D" type="Sprite2D" parent="Starship" unique_id=343599404]
 scale = Vector2(0.23636362, 0.23636363)
 texture = ExtResource("1_5ogd2")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1206827131]
-position = Vector2(0, 648)
+[node name="Camera2D" type="Camera2D" parent="Starship" unique_id=1585750019]
+limit_enabled = false
+position_smoothing_speed = 4.0
+script = ExtResource("4_dfdgy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=333878887]
-position = Vector2(589, -40)
+[node name="Land" type="Area2D" parent="." unique_id=1206827131]
+position = Vector2(-10, 1120)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Land" unique_id=333878887]
+position = Vector2(965, -40)
 shape = SubResource("RectangleShape2D_5wfv7")
 
-[connection signal="body_entered" from="Area2D" to="RigidBody2D" method="_on_area_2d_body_entered"]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=65945142]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=645980651]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PropGauge" type="ProgressBar" parent="CanvasLayer/Control" unique_id=498435802 node_paths=PackedStringArray("starship")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.1
+anchor_top = 0.3
+anchor_right = 9.459002
+anchor_bottom = 11.556002
+offset_left = 44.0
+offset_top = 28.0
+offset_right = -138.36002
+offset_bottom = -382.24005
+theme_override_styles/background = SubResource("StyleBoxFlat_4y73a")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7rytq")
+max_value = 1000.0
+value = 1000.0
+allow_greater = true
+show_percentage = false
+script = ExtResource("3_hk0ex")
+starship = NodePath("../../../Starship")
+metadata/_edit_use_anchors_ = true
+
+[node name="Throttle" type="ProgressBar" parent="CanvasLayer/Control" unique_id=1988183089 node_paths=PackedStringArray("starship")]
+layout_mode = 1
+offset_left = 40.0
+offset_top = 110.0
+offset_right = 240.0
+offset_bottom = 150.0
+theme_override_styles/background = SubResource("StyleBoxFlat_xf4yl")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vjvg7")
+show_percentage = false
+script = ExtResource("4_htxsa")
+starship = NodePath("../../../Starship")
+
+[node name="Altimeter" type="Label" parent="CanvasLayer/Control" unique_id=389722824]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 410.0
+offset_right = 361.0
+offset_bottom = 433.0
+text = "Altitude: Standby for Acquisition of Signal"
+
+[node name="TargetOffset" type="Label" parent="CanvasLayer/Control" unique_id=874698171]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 440.0
+offset_right = 361.0
+offset_bottom = 463.0
+text = "Target Offset: Standby for Acquisition of Signal"
+
+[node name="Velocity" type="Label" parent="CanvasLayer/Control" unique_id=258425340]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 470.0
+offset_right = 400.0
+offset_bottom = 493.0
+text = "Velocity: Standby for Acquisition of Signal"
+
+[node name="Speed" type="Label" parent="CanvasLayer/Control" unique_id=1969566577]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 503.0
+offset_right = 400.0
+offset_bottom = 526.0
+text = "Speed: Standby for Acquisition of Signal"
+
+[node name="3Engines" type="Sprite2D" parent="CanvasLayer" unique_id=968264892]
+position = Vector2(140, 275)
+texture = ExtResource("6_3542s")
+
+[node name="2Engines" type="Sprite2D" parent="CanvasLayer" unique_id=2016750725]
+visible = false
+position = Vector2(140, 275)
+texture = ExtResource("7_dfdgy")
+
+[node name="1Engine" type="Sprite2D" parent="CanvasLayer" unique_id=2108164887]
+visible = false
+position = Vector2(140, 275)
+texture = ExtResource("8_kvxyv")
+
+[node name="0Engines" type="Sprite2D" parent="CanvasLayer" unique_id=1219415110]
+visible = false
+position = Vector2(140, 275)
+texture = ExtResource("9_uxuuy")
+
+[connection signal="body_entered" from="Land" to="Starship" method="_on_area_2d_body_entered"]
