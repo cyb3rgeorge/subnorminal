@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c47ipy74s0tk6"
-path="res://.godot/imported/starship.png-8486d8317e7c40a88ff60b849e94dd46.ctex"
+uid="uid://dqtmtm7nw3g0p"
+path="res://.godot/imported/sky.png-da884f3fa1b2608ffbf2bf78d851eaa9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/starship.png"
-dest_files=["res://.godot/imported/starship.png-8486d8317e7c40a88ff60b849e94dd46.ctex"]
+source_file="res://media/sky.png"
+dest_files=["res://.godot/imported/sky.png-da884f3fa1b2608ffbf2bf78d851eaa9.ctex"]
 
 [params]
 

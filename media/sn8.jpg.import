@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1yy6e21moph8"
-path="res://.godot/imported/raptor3.png-d8a604122b2a4371adb53af6da007585.ctex"
+uid="uid://c35cba1wnu00i"
+path="res://.godot/imported/sn8.jpg-87c105f839e71ddb1d43479977ddcc39.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/raptor3.png"
-dest_files=["res://.godot/imported/raptor3.png-d8a604122b2a4371adb53af6da007585.ctex"]
+source_file="res://media/sn8.jpg"
+dest_files=["res://.godot/imported/sn8.jpg-87c105f839e71ddb1d43479977ddcc39.ctex"]
 
 [params]
 

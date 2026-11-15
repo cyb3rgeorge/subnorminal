@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d10s5uv25b8np"
-path="res://.godot/imported/chopsticks.png-feaec4fdf73ff521f7b0efeef107882e.ctex"
+uid="uid://dt7jq8aesh5fy"
+path="res://.godot/imported/raptor1.png-6d27ef562a744c99ab2f84ef2bc95957.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/chopsticks.png"
-dest_files=["res://.godot/imported/chopsticks.png-feaec4fdf73ff521f7b0efeef107882e.ctex"]
+source_file="res://raptor1.png"
+dest_files=["res://.godot/imported/raptor1.png-6d27ef562a744c99ab2f84ef2bc95957.ctex"]
 
 [params]
 

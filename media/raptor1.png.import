@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddpdtrd0tbnna"
-path="res://.godot/imported/hls.png-6f8537b4468f457f43b58aacc2acfa47.ctex"
+uid="uid://bntt87ui0xi1r"
+path="res://.godot/imported/raptor1.png-0ad3b43ee369d070ce956a19fd31256f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/hls.png"
-dest_files=["res://.godot/imported/hls.png-6f8537b4468f457f43b58aacc2acfa47.ctex"]
+source_file="res://media/raptor1.png"
+dest_files=["res://.godot/imported/raptor1.png-0ad3b43ee369d070ce956a19fd31256f.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqtmtm7nw3g0p"
-path="res://.godot/imported/sky.png-08ac01b276b8d7ae698a9aae0f1a275b.ctex"
+uid="uid://d10s5uv25b8np"
+path="res://.godot/imported/chopsticks.png-a810e4287e1140235b8eed17de1899de.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/sky.png"
-dest_files=["res://.godot/imported/sky.png-08ac01b276b8d7ae698a9aae0f1a275b.ctex"]
+source_file="res://media/chopsticks.png"
+dest_files=["res://.godot/imported/chopsticks.png-a810e4287e1140235b8eed17de1899de.ctex"]
 
 [params]
 

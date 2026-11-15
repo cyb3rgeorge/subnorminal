@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Subnorminal"
-run/main_scene="uid://bpewqquya7kue"
+run/main_scene="uid://by7j03igxkmx8"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
