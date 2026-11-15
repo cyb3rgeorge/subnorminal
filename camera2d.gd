@@ -6,7 +6,7 @@ extends Camera2D
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP: 
 			zoom += Vector2(zoom_speed, zoom_speed)
 			zoom.x = clamp(zoom.x, min_zoom, max_zoom)
 			zoom.y = clamp(zoom.y, min_zoom, max_zoom)
@@ -14,3 +14,11 @@ func _input(event):
 			zoom -= Vector2(zoom_speed, zoom_speed)
 			zoom.x = clamp(zoom.x, min_zoom, max_zoom)
 			zoom.y = clamp(zoom.y, min_zoom, max_zoom)
+	if Input.is_action_pressed("zoomIn"):
+		zoom += Vector2(zoom_speed, zoom_speed)
+		zoom.x = clamp(zoom.x, min_zoom, max_zoom)
+		zoom.y = clamp(zoom.y, min_zoom, max_zoom)
+	if Input.is_action_pressed("zoomOut"):
+		zoom -= Vector2(zoom_speed, zoom_speed)
+		zoom.x = clamp(zoom.x, min_zoom, max_zoom)
+		zoom.y = clamp(zoom.y, min_zoom, max_zoom)

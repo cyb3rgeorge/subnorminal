@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7ytvixpg1g5q"
-path="res://.godot/imported/jared.png-c9d7fca8b05a4b1bf8b7e36f585ca4d7.ctex"
+uid="uid://f1rduu3r0cgh"
+path="res://.godot/imported/ground.png-7a88e92f8fe1cd2396f59adeac868c2d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/jared.png"
-dest_files=["res://.godot/imported/jared.png-c9d7fca8b05a4b1bf8b7e36f585ca4d7.ctex"]
+source_file="res://media/ground.png"
+dest_files=["res://.godot/imported/ground.png-7a88e92f8fe1cd2396f59adeac868c2d.ctex"]
 
 [params]
 

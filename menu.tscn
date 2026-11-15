@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://by7j03igxkmx8"]
+
+[ext_resource type="Script" uid="uid://qf1ergsb8pai" path="res://menu.gd" id="1_lti8b"]
+[ext_resource type="Texture2D" uid="uid://rjxyt5iu46v4" path="res://media/menuPicture.jpg" id="2_mae5d"]
+[ext_resource type="AudioStream" uid="uid://ds5un1he0j7nu" path="res://media/Arcadia.mp3" id="3_4hy44"]
+
+[sub_resource type="GDScript" id="GDScript_5wfv7"]
+script/source = "extends Node
+
+var failures : int = 0
+"
+
+[node name="Node2D" type="Node2D" unique_id=1357228171]
+rotation = -0.0032296565
+script = ExtResource("1_lti8b")
+
+[node name="MenuPicture" type="Sprite2D" parent="." unique_id=1950294859]
+position = Vector2(1164.3533, 511.7631)
+scale = Vector2(0.6838313, 0.6838313)
+texture = ExtResource("2_mae5d")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=539137796]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=241347718]
+offset_left = 1148.0
+offset_top = 807.0
+offset_right = 1227.0
+offset_bottom = 830.0
+theme_override_colors/font_color = Color(0.23387015, 0.23387015, 0.23387015, 1)
+text = "Failures: 0"
+script = SubResource("GDScript_5wfv7")
+
+[node name="Control" type="Control" parent="." unique_id=327519560]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="Control" unique_id=312785559]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.393
+anchor_top = 7.175
+anchor_right = 30.068
+anchor_bottom = 18.547
+offset_left = 1087.023
+offset_top = 413.69427
+offset_right = 109.02319
+offset_bottom = 29.814209
+scale = Vector2(1.48, 1.48)
+text = "Initiate Mission"
+
+[node name="Label" type="Label" parent="." unique_id=264226013]
+offset_left = 79.5119
+offset_top = 151.2576
+offset_right = 477.5119
+offset_bottom = 239.2576
+scale = Vector2(2.401931, 2.401931)
+theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+theme_override_font_sizes/font_size = 64
+text = "Subnorminal"
+
+[node name="Label" type="Label" parent="Label" unique_id=174557750]
+layout_mode = 0
+offset_left = 2.2532585
+offset_top = 75.780014
+offset_right = 79.25326
+offset_bottom = 98.780014
+theme_override_colors/font_color = Color(0.23387015, 0.23387015, 0.23387015, 1)
+text = "Catching a Pencil Falling from Space with Chopsticks"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=883319262]
+stream = ExtResource("3_4hy44")
+autoplay = true
+parameters/looping = true
+
+[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddpdtrd0tbnna"
-path="res://.godot/imported/hls.png-6f8537b4468f457f43b58aacc2acfa47.ctex"
+uid="uid://bea3r3iojgsco"
+path="res://.godot/imported/landing.jpg-f4af4c47c52ed7dd4d4584e22bc7d98b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/hls.png"
-dest_files=["res://.godot/imported/hls.png-6f8537b4468f457f43b58aacc2acfa47.ctex"]
+source_file="res://media/landing.jpg"
+dest_files=["res://.godot/imported/landing.jpg-f4af4c47c52ed7dd4d4584e22bc7d98b.ctex"]
 
 [params]
 
