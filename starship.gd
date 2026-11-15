@@ -10,14 +10,14 @@ signal throttleTelemetry
 @export var prop = maxProp
 @export var throttle = 0
 @export var engines = 0
-@export var dryMass = 100000
+@export var dryMass = 1000
 
 # Corrections
 const altitudeCorrection = 964
 const targetOffsetCorrection = 960
 
 # Specs
-var power = 330000
+var power = 500
 var angularPower = 500
 
 var thrust = Vector2.ZERO

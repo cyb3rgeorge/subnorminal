@@ -58,16 +58,20 @@ freeze_mode = 1
 linear_damp = 2.0
 angular_damp = 1.0
 script = ExtResource("1_agxhv")
+dryMass = 100000
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Starship" unique_id=92514545]
 position = Vector2(-1, 0)
+rotation = -1.1670965
 polygon = PackedVector2Array(1, -84, 4, -80, 10, -68, 13, -56, 14, -44, 15, 77, -13, 77, -13, -46, -12, -56, -10, -64, -7, -72, -4, -78, -1, -83)
 
 [node name="Sprite2D" type="Sprite2D" parent="Starship" unique_id=343599404]
+rotation = -1.1670965
 scale = Vector2(0.23636362, 0.23636363)
 texture = ExtResource("1_5ogd2")
 
 [node name="Camera2D" type="Camera2D" parent="Starship" unique_id=1585750019]
+rotation = 0.36363494
 limit_enabled = false
 position_smoothing_speed = 4.0
 script = ExtResource("4_dfdgy")
