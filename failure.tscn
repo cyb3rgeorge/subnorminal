@@ -13,15 +13,15 @@ func _on_button_pressed() -> void:
 script = SubResource("GDScript_5wfv7")
 
 [node name="Sn8" type="Sprite2D" parent="." unique_id=461461872]
-position = Vector2(971, 659.2994)
-scale = Vector2(2.08316, 2.0831597)
+position = Vector2(948, 574)
+scale = Vector2(1.0159085, 1.0159084)
 texture = ExtResource("1_fi0pi")
 
 [node name="Label" type="Label" parent="." unique_id=972587084]
-offset_left = 75.0
-offset_top = 101.0
-offset_right = 696.0
-offset_bottom = 238.0
+offset_left = 79.0
+offset_top = 147.0
+offset_right = 700.0
+offset_bottom = 284.0
 theme_override_font_sizes/font_size = 48
 text = "We have had an anomaly...
 Progress is never free."
@@ -41,13 +41,14 @@ anchor_left = 1.393
 anchor_top = 7.175
 anchor_right = 30.068
 anchor_bottom = 18.547
-offset_left = -85.72003
-offset_top = -285.00003
-offset_right = -1092.8551
-offset_bottom = -671.63684
+offset_left = -98.72002
+offset_top = -222.00003
+offset_right = -1091.6659
+offset_bottom = -608.63684
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.48, 1.48)
+theme_override_font_sizes/font_size = 24
 text = "Try Again"
 
 [connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]
