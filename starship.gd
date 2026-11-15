@@ -13,11 +13,11 @@ signal throttleTelemetry
 @export var dryMass = 1000
 
 # Corrections
-const altitudeCorrection = 964
-const targetOffsetCorrection = 960
+const altitudeCorrection = 1014
+const targetOffsetCorrection = 1014
 
 # Specs
-var power = 500
+var power = 2000
 var angularPower = 500
 
 var thrust = Vector2.ZERO
@@ -34,54 +34,6 @@ func _ready() -> void:
 
 	$"../FailureStartTimer".start()
 
-func _on_failure_start_timer_timeout() -> void:
-	$"../FailureTimer".start()
-
-func _on_failure_timer_timeout() -> void:
-	var failureNumber = rng.randf_range(0.0, 42.0)
-	print(failureNumber)
-	if Global.failures < 3:
-		if failureNumber > 21.0:
-			Global.failures = Global.failures + 1
-			get_tree().change_scene_to_file("res://failure.tscn")
-		else:
-			$"../FailureTimer".start()
-	if Global.failures > 3 and Global.failures < 5:
-		if failureNumber > 24.0:
-			Global.failures = Global.failures + 1
-			get_tree().change_scene_to_file("res://failure.tscn")
-		else:
-			$"../FailureTimer".start()
-	if Global.failures > 5 and Global.failures < 8:
-		if failureNumber > 27.0:
-			Global.failures = Global.failures + 1
-			get_tree().change_scene_to_file("res://failure.tscn")
-		else:
-			$"../FailureTimer".start()
-	if Global.failures > 8 and Global.failures < 11:
-		if failureNumber > 30.0:
-			Global.failures = Global.failures + 1
-			get_tree().change_scene_to_file("res://failure.tscn")
-		else:
-			$"../FailureTimer".start()
-	if Global.failures > 11 and Global.failures < 13:
-		if failureNumber > 33.0:
-			Global.failures = Global.failures + 1
-			get_tree().change_scene_to_file("res://failure.tscn")
-		else:
-			$"../FailureTimer".start()
-	if Global.failures > 13 and Global.failures < 16:
-		if failureNumber > 36.0:
-			Global.failures = Global.failures + 1
-			get_tree().change_scene_to_file("res://failure.tscn")
-		else:
-			$"../FailureTimer".start()
-	if Global.failures > 16 and Global.failures < 20:
-		if failureNumber > 39.0:
-			Global.failures = Global.failures + 1
-			get_tree().change_scene_to_file("res://failure.tscn")
-		else:
-			$"../FailureTimer".start()
 
 func get_input():
 	thrust = Vector2.ZERO
@@ -137,7 +89,6 @@ func _physics_process (delta):
 	var dragDirection = -sign(linear_velocity.y)
 	apply_central_force(Vector2(0, dragForce * dragDirection))
 	
-	
 	$"../Telemetry/Control/Altimeter".text = "Altitude: " + str(-altitude + altitudeCorrection)
 	$"../Telemetry/Control/TargetOffset".text = "Target Offset: " + str(targetOffset - targetOffsetCorrection)
 	$"../Telemetry/Control/Velocity".text = "Velocity: " + str(velocity)
@@ -156,9 +107,27 @@ func _physics_process (delta):
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == self:
+		print("failure")
 		set_deferred("freeze", true)
 		Global.failures = Global.failures + 1
 		$"../EndTimer".start()
-		
+
+func _on_tower_area_body_entered(body: Node2D) -> void:
+	if body == self:
+		print("failure")
+		set_deferred("freeze", true)
+		Global.failures = Global.failures + 1
+		$"../EndTimer".start()
+	
+func _on_chopsticks_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("fwd"):
+		print("success")
+		set_deferred("freeze", true)
+		Global.failures = Global.failures + 1
+		$"../WinEndTimer".start()
+
 func _on_end_timer_timeout() -> void:
-	get_tree().change_scene_to_file("res://menu.tscn")
+	get_tree().change_scene_to_file("res://failure.tscn")
+
+func _on_win_end_timer_timeout() -> void:
+	get_tree().change_scene_to_file("res://success.tscn")
