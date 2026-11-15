@@ -2,6 +2,8 @@
 Inspired by the journey of humanity to earn our place among the stars, we start with SpaceX's vision of rapidly reusable rockets, catching them like pencils falling from space, with chopsticks.
 With real physics (we tried out best lol)!
 
+Note: Rocket may explode randomly (intentional), 'cause space is hard!
+
 ## Controls
 
 | Key | Function|
