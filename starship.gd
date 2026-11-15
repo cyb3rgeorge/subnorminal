@@ -23,11 +23,65 @@ var angularPower = 500
 var thrust = Vector2.ZERO
 var rotationalDirection = 0
 
-# Telemetry (Velocity and Speed)
+# Telemetry (Velocity and Speed) & Failure Modes
 var previous_position: Vector2
+
+var rng = RandomNumberGenerator.new()
+
 func _ready() -> void:
 	mass = dryMass
 	previous_position = global_position
+
+	$"../FailureStartTimer".start()
+
+func _on_failure_start_timer_timeout() -> void:
+	$"../FailureTimer".start()
+
+func _on_failure_timer_timeout() -> void:
+	var failureNumber = rng.randf_range(0.0, 42.0)
+	print(failureNumber)
+	if Global.failures < 3:
+		if failureNumber > 21.0:
+			Global.failures = Global.failures + 1
+			get_tree().change_scene_to_file("res://failure.tscn")
+		else:
+			$"../FailureTimer".start()
+	if Global.failures > 3 and Global.failures < 5:
+		if failureNumber > 24.0:
+			Global.failures = Global.failures + 1
+			get_tree().change_scene_to_file("res://failure.tscn")
+		else:
+			$"../FailureTimer".start()
+	if Global.failures > 5 and Global.failures < 8:
+		if failureNumber > 27.0:
+			Global.failures = Global.failures + 1
+			get_tree().change_scene_to_file("res://failure.tscn")
+		else:
+			$"../FailureTimer".start()
+	if Global.failures > 8 and Global.failures < 11:
+		if failureNumber > 30.0:
+			Global.failures = Global.failures + 1
+			get_tree().change_scene_to_file("res://failure.tscn")
+		else:
+			$"../FailureTimer".start()
+	if Global.failures > 11 and Global.failures < 13:
+		if failureNumber > 33.0:
+			Global.failures = Global.failures + 1
+			get_tree().change_scene_to_file("res://failure.tscn")
+		else:
+			$"../FailureTimer".start()
+	if Global.failures > 13 and Global.failures < 16:
+		if failureNumber > 36.0:
+			Global.failures = Global.failures + 1
+			get_tree().change_scene_to_file("res://failure.tscn")
+		else:
+			$"../FailureTimer".start()
+	if Global.failures > 16 and Global.failures < 20:
+		if failureNumber > 39.0:
+			Global.failures = Global.failures + 1
+			get_tree().change_scene_to_file("res://failure.tscn")
+		else:
+			$"../FailureTimer".start()
 
 func get_input():
 	thrust = Vector2.ZERO
@@ -82,6 +136,7 @@ func _physics_process (delta):
 	var dragForce = abs(orientation.x) * 441 * linear_velocity.y ** 2
 	var dragDirection = -sign(linear_velocity.y)
 	apply_central_force(Vector2(0, dragForce * dragDirection))
+	
 	
 	$"../Telemetry/Control/Altimeter".text = "Altitude: " + str(-altitude + altitudeCorrection)
 	$"../Telemetry/Control/TargetOffset".text = "Target Offset: " + str(targetOffset - targetOffsetCorrection)

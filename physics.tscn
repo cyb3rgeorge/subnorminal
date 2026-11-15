@@ -52,6 +52,7 @@ texture = ExtResource("5_xf4yl")
 [node name="Starship" type="RigidBody2D" parent="." unique_id=1724685367]
 position = Vector2(960, -3068)
 rotation = 1.176179
+gravity_scale = 0.0
 inertia = 1000.0
 can_sleep = false
 freeze_mode = 1
@@ -186,6 +187,10 @@ texture = ExtResource("9_uxuuy")
 
 [node name="EndTimer" type="Timer" parent="." unique_id=86791372]
 wait_time = 2.0
+
+[node name="FailureStartTimer" type="Timer" parent="." unique_id=1928394822]
+
+[node name="FailureTimer" type="Timer" parent="." unique_id=2068234445]
 
 [connection signal="body_entered" from="Land" to="Starship" method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="EndTimer" to="Starship" method="_on_end_timer_timeout"]
