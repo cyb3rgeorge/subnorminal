@@ -61,9 +61,9 @@ scale = Vector2(203.62944, 183.74208)
 texture = ExtResource("1_syqjv")
 
 [node name="Sky2" type="Sprite2D" parent="." unique_id=1427529558]
-position = Vector2(1129.0144, -5123.22)
+position = Vector2(211.75781, -5117.336)
 rotation = 3.1351771
-scale = Vector2(3.4665961, -2.263264)
+scale = Vector2(40.23882, -2.263264)
 texture = ExtResource("2_rlt7b")
 
 [node name="Starship" type="RigidBody2D" parent="." unique_id=1724685367]
@@ -130,8 +130,8 @@ position = Vector2(940, 39)
 shape = SubResource("RectangleShape2D_5wfv7")
 
 [node name="Ground" type="Sprite2D" parent="Land" unique_id=1673512014]
-position = Vector2(1345.0005, 1579.0002)
-scale = Vector2(11.068532, 7.0797496)
+position = Vector2(339, 5378.51)
+scale = Vector2(167.20169, 23.044073)
 texture = ExtResource("12_uxuuy")
 
 [node name="Telemetry" type="CanvasLayer" parent="." unique_id=65945142]
