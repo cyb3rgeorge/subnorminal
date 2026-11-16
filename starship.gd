@@ -9,7 +9,7 @@ signal throttleTelemetry
 @export var maxProp: int = 2000
 @export var throttle: int = 0
 @export var engines: int = 0
-@export var dryMass: float = 1000.0
+@export var dryMass: float = 100000.0
 
 # Print the runtime setting and the cause of each win/loss.
 @export var debugFailures: bool = true
@@ -34,7 +34,8 @@ signal throttleTelemetry
 			failure_start_timer.start()
 
 # CONSTANTS
-const DRAG_COEFFICIENT: float = 441.0
+const DRAG_COEFFICIENT: float = 0.0
+#const DRAG_COEFFICIENT: float = 441.0
 const TELEMETRY_INTERVAL: float = 0.1
 const FAILURE_CHECK_INTERVAL: float = 5.0
 
@@ -211,7 +212,7 @@ func _physics_process(delta: float) -> void:
 
 	if burning:
 		# Restore original thrust behavior
-		thrust -= engines * throttle * transform.x * power
+		thrust -= engines * throttle * transform.x.normalized() * power
 
 		# Fuel consumption based on throttle percentage
 		var throttle_fraction := throttle / 100.0

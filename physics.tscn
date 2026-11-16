@@ -75,7 +75,6 @@ freeze_mode = 1
 linear_damp = 2.0
 angular_damp = 1.0
 script = ExtResource("1_agxhv")
-dryMass = 100000.0
 
 [node name="RaptorThrottle1" type="Sprite2D" parent="Starship" unique_id=1863118857]
 visible = false
