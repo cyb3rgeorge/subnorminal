@@ -9,10 +9,10 @@ Note: Rocket may explode randomly (intentional), 'cause space is hard!
 
 | Key | Function|
 |-----|---------|
+| 1 | 1-engine burn |
+| 2 | 2-engine burn |
+| 3 | 3-engine burn |
 | Q | Engine cutoff |
-| 1 | 1 engine |
-| 2 | 2 engines |
-| 3 | 3 engines |
 | W/arrowUp | Throttle up |
 | S/arrowDown | Throttle down |
 | A/arrowLeft | Pitch up |
