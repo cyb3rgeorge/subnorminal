@@ -8,6 +8,7 @@ signal throttleTelemetry
 
 # Ship Configurations
 @export var maxProp : int = 4000
+@export var initialPropMass : int = 6000
 @export var throttle : float = 0.0
 @export var engines : int = 0
 @export var dryMass : float = 150000.0
@@ -20,7 +21,7 @@ var failureThreshold := 21.0
 # CONSTANTS
 const GRAVITATIONAL_ACCELERATION : float = 9.80665 # / m s^-2
 const AIR_DENSITY_MSL : float = 1.2250 # At mean sea level /kg m^-3
-const STARSHIP_HEIGHT : float = 52.0 # /m
+const STARSHIP_HEIGHT : float = 52.1 # /m
 const STARSHIP_DIAMETER : float = 9.0 # /m
 const STARSHIP_BELLY_DRAG_AREA : float = STARSHIP_HEIGHT * STARSHIP_DIAMETER # Assume Starship is a 2-D rectangle /m^2
 const STARSHIP_BELLY_DRAG_COEFFICIENT : float = 1.2 # Assume Starship is a perfect cylinder
@@ -77,6 +78,7 @@ var _wasBurning : bool = false
 @onready var SpeedReadOut = $"../Telemetry/Control/Speed"
 @onready var DragForceReadOut = $"../Telemetry/Control/DragForce"
 @onready var AirDensityReadOut = $"../Telemetry/Control/AirDensity"
+@onready var WetMassReadOut = $"../Telemetry/Control/WetMass"
 
 
 # Initialization
@@ -88,7 +90,6 @@ func _ready() -> void:
 	engines = clampi(engines, 0, 3)
 	
 	prop = float(maxi(maxProp, 0))
-	mass = dryMass
 	
 	_update_engine_indicators()
 	
@@ -142,6 +143,9 @@ func _physics_process (delta):
 		propTelemetry.emit()
 	constant_force = thrust / METERS_PER_PIXEL
 	
+	mass = dryMass + initialPropMass * prop/maxProp
+	var wetMass: float = mass
+	
 	# Flight Data
 	var altitude_m := maxf(0.0, (GROUND_Y - global_position.y) * METERS_PER_PIXEL)
 	var targetOffset_m := (global_position.x - TARGET_X) * METERS_PER_PIXEL
@@ -189,7 +193,7 @@ func _physics_process (delta):
 	_telemetryElapsed += delta
 	if _telemetryElapsed >= TELEMETRY_INTERVAL:
 		_telemetryElapsed = 0.0
-		_update_telemetry(altitude_m, targetOffset_m, velocity_mps, dragForce, airDensity)
+		_update_telemetry(altitude_m, targetOffset_m, velocity_mps, dragForce, airDensity, mass)
 
 	
 # Update Engine Indicators
@@ -211,7 +215,7 @@ func _update_effects(burning: bool) -> void:
 	
 	
 # Telemetry
-func _update_telemetry(altitude_m: float, targetOffset_m: float, velocity_mps: Vector2, dragForce: Vector2, airDensity: float) -> void:
+func _update_telemetry(altitude_m: float, targetOffset_m: float, velocity_mps: Vector2, dragForce: Vector2, airDensity: float, wetMass: float) -> void:
 	var speed_mps := velocity_mps.length()
 	var dragForce_kn = dragForce/1000.0
 	
@@ -221,6 +225,7 @@ func _update_telemetry(altitude_m: float, targetOffset_m: float, velocity_mps: V
 	SpeedReadOut.text = "Speed: %.1f m/s" % speed_mps
 	DragForceReadOut.text = "Drag Force: (%.1f, %.1f) kN" % [dragForce_kn.x, -dragForce_kn.y]
 	AirDensityReadOut.text = "Air Density: %.3f kg/m^3" % [airDensity]
+	WetMassReadOut.text = "Air Density: %.0f kg" % [wetMass]
 	
 	
 # Random Failures

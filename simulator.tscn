@@ -219,6 +219,15 @@ offset_bottom = 653.0
 scale = Vector2(1.5, 1.5)
 text = "Air Density: Standby for Acquisition of Signal"
 
+[node name="WetMass" type="Label" parent="Telemetry/Control" unique_id=1966171986]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 668.0
+offset_right = 400.0
+offset_bottom = 691.0
+scale = Vector2(1.5, 1.5)
+text = "Mass: Standby for Acquisition of Signal"
+
 [node name="3Engines" type="Sprite2D" parent="Telemetry" unique_id=968264892]
 visible = false
 position = Vector2(187, 303)
