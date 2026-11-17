@@ -1,23 +1,26 @@
 [gd_scene format=3 uid="uid://by7j03igxkmx8"]
 
-[ext_resource type="Script" uid="uid://qf1ergsb8pai" path="res://menu.gd" id="1_lti8b"]
-[ext_resource type="Texture2D" uid="uid://rjxyt5iu46v4" path="res://media/menuPicture.jpg" id="2_mae5d"]
-[ext_resource type="AudioStream" uid="uid://ds5un1he0j7nu" path="res://media/Arcadia.mp3" id="3_4hy44"]
+[ext_resource type="Script" uid="uid://qf1ergsb8pai" path="res://menu.gd" id="1_e0arn"]
+[ext_resource type="Texture2D" uid="uid://rjxyt5iu46v4" path="res://media/menuPicture.jpg" id="2_037ec"]
+[ext_resource type="AudioStream" uid="uid://ds5un1he0j7nu" path="res://media/Arcadia.mp3" id="3_y1o0p"]
 
 [sub_resource type="GDScript" id="GDScript_5wfv7"]
 script/source = "extends Node
 
 var failures : int = 0
+
+func _on_button_pressed() -> void:
+	get_tree().change_scene_to_file(Global.SIMULATOR)
 "
 
 [node name="Node2D" type="Node2D" unique_id=1357228171]
 rotation = -0.0032296565
-script = ExtResource("1_lti8b")
+script = ExtResource("1_e0arn")
 
 [node name="MenuPicture" type="Sprite2D" parent="." unique_id=1950294859]
 position = Vector2(1196.8813, 532.09314)
 scale = Vector2(0.70265543, 0.70265543)
-texture = ExtResource("2_mae5d")
+texture = ExtResource("2_037ec")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=539137796]
 
@@ -71,7 +74,7 @@ theme_override_colors/font_color = Color(0.23387015, 0.23387015, 0.23387015, 1)
 text = "Catching a Pencil Falling from Space with Chopsticks"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=883319262]
-stream = ExtResource("3_4hy44")
+stream = ExtResource("3_y1o0p")
 autoplay = true
 parameters/looping = true
 
