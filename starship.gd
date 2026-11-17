@@ -34,8 +34,7 @@ signal throttleTelemetry
 			failure_start_timer.start()
 
 # CONSTANTS
-const DRAG_COEFFICIENT: float = 0.0
-#const DRAG_COEFFICIENT: float = 441.0
+const DRAG_COEFFICIENT: float = 441.0
 const TELEMETRY_INTERVAL: float = 0.1
 const FAILURE_CHECK_INTERVAL: float = 5.0
 
@@ -51,12 +50,11 @@ const FAILURE_STAGES := [3, 5, 8, 11, 13, 16]
 
 # WORLD SCALE
 const METERS_PER_PIXEL: float = 60.0 / 158.0
-const SHIP_HALF_HEIGHT: float = 79.0
-const GROUND_Y: float = 1059.0
+const GROUND_Y: float = 1015.0
 const TARGET_X: float = 1014.0
 
 # PHYSICS
-var power: float = 30000.0
+var power: float = 500000.0
 var angularPower: float = 500.0
 var prop: float = 0.0
 var thrust: Vector2 = Vector2.ZERO
@@ -287,18 +285,16 @@ func _update_effects(burning: bool) -> void:
 
 # TELEMETRY
 func _update_telemetry(drag_magnitude: float) -> void:
-	var pos := global_position
 	var velocity_mps := linear_velocity * METERS_PER_PIXEL
 
 	# Assumes a centred, upright ship, 158 world units tall.
 	# This remains an approximation when the ship rotates.
-	var ship_bottom_y := pos.y + SHIP_HALF_HEIGHT
 	var altitude_m := maxf(
 		0.0,
-		(GROUND_Y - ship_bottom_y) * METERS_PER_PIXEL
+		(GROUND_Y - global_position.y) * METERS_PER_PIXEL
 	)
 
-	var offset_m := (pos.x - TARGET_X) * METERS_PER_PIXEL
+	var offset_m := (global_position.x - TARGET_X) * METERS_PER_PIXEL
 	var speed_mps := velocity_mps.length()
 
 	# Assumes body mass is in kg and time is in seconds.
