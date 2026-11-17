@@ -18,8 +18,8 @@ const FAILURE_STAGES := [3, 5, 8, 11, 13, 16]
 var failureThreshold := 21.0
 
 # CONSTANTS
-const GRAVITY : float = 9.81 # / m s^-2
-const AIR_DENSITY : float = 1.2250 # At sea level and assume air density is constant /kg m^-3
+const GRAVITATIONAL_ACCELERATION : float = 9.80665 # / m s^-2
+const AIR_DENSITY_MSL : float = 1.2250 # At mean sea level /kg m^-3
 const STARSHIP_HEIGHT : float = 52.0 # /m
 const STARSHIP_DIAMETER : float = 9.0 # /m
 const STARSHIP_BELLY_DRAG_AREA : float = STARSHIP_HEIGHT * STARSHIP_DIAMETER # Assume Starship is a 2-D rectangle /m^2
@@ -76,12 +76,13 @@ var _wasBurning : bool = false
 @onready var VelocityReadOut = $"../Telemetry/Control/Velocity"
 @onready var SpeedReadOut = $"../Telemetry/Control/Speed"
 @onready var DragForceReadOut = $"../Telemetry/Control/DragForce"
+@onready var AirDensityReadOut = $"../Telemetry/Control/AirDensity"
 
 
 # Initialization
 
 func _ready() -> void:
-	gravity_scale = 9.81 / (980.0 * METERS_PER_PIXEL)
+	gravity_scale = GRAVITATIONAL_ACCELERATION / (980.0 * METERS_PER_PIXEL)
 	
 	throttle = 0.0
 	engines = clampi(engines, 0, 3)
@@ -141,16 +142,22 @@ func _physics_process (delta):
 		propTelemetry.emit()
 	constant_force = thrust / METERS_PER_PIXEL
 	
+	# Flight Data
+	var altitude_m := maxf(0.0, (GROUND_Y - global_position.y) * METERS_PER_PIXEL)
+	var targetOffset_m := (global_position.x - TARGET_X) * METERS_PER_PIXEL
+	var velocity_mps := linear_velocity * METERS_PER_PIXEL
+	
 	#Drag Froce
+	var airDensity = AIR_DENSITY_MSL * (1-2.25577e-5 * altitude_m) ** 4.25588
 	var orientation = Vector2(cos(rotation), sin(rotation)) 
 	
 	# Drag X
 	var dragForceX = ((
-		0.5 * STARSHIP_BELLY_DRAG_COEFFICIENT * AIR_DENSITY * STARSHIP_BELLY_DRAG_AREA * 
+		0.5 * STARSHIP_BELLY_DRAG_COEFFICIENT * airDensity * STARSHIP_BELLY_DRAG_AREA * 
 		(linear_velocity.x*METERS_PER_PIXEL) ** 2
 		) * abs(orientation.y) 
 		+ (
-		0.5 * STARSHIP_CROSS_SECTIONAL_DRAG_CEFFICIENT * AIR_DENSITY * STARSHIP_CROSS_SECTIONAL_DRAG_AREA * 
+		0.5 * STARSHIP_CROSS_SECTIONAL_DRAG_CEFFICIENT * airDensity * STARSHIP_CROSS_SECTIONAL_DRAG_AREA * 
 		(linear_velocity.x*METERS_PER_PIXEL) ** 2
 		) * abs(orientation.x) 
 		)
@@ -158,11 +165,11 @@ func _physics_process (delta):
 	
 	# Drag Y
 	var dragForceY = ((
-		0.5 * STARSHIP_BELLY_DRAG_COEFFICIENT * AIR_DENSITY * STARSHIP_BELLY_DRAG_AREA * 
+		0.5 * STARSHIP_BELLY_DRAG_COEFFICIENT * airDensity * STARSHIP_BELLY_DRAG_AREA * 
 		(linear_velocity.y*METERS_PER_PIXEL) ** 2
 		) * abs(orientation.x) 
 		+ (
-		0.5 * STARSHIP_CROSS_SECTIONAL_DRAG_CEFFICIENT * AIR_DENSITY * STARSHIP_CROSS_SECTIONAL_DRAG_AREA * 
+		0.5 * STARSHIP_CROSS_SECTIONAL_DRAG_CEFFICIENT * airDensity * STARSHIP_CROSS_SECTIONAL_DRAG_AREA * 
 		(linear_velocity.y*METERS_PER_PIXEL) ** 2
 		) * abs(orientation.y) 
 		)
@@ -182,7 +189,7 @@ func _physics_process (delta):
 	_telemetryElapsed += delta
 	if _telemetryElapsed >= TELEMETRY_INTERVAL:
 		_telemetryElapsed = 0.0
-		_update_telemetry(dragForce)
+		_update_telemetry(altitude_m, targetOffset_m, velocity_mps, dragForce, airDensity)
 
 	
 # Update Engine Indicators
@@ -204,10 +211,7 @@ func _update_effects(burning: bool) -> void:
 	
 	
 # Telemetry
-func _update_telemetry(dragForce: Vector2) -> void:
-	var altitude_m := maxf(0.0, (GROUND_Y - global_position.y) * METERS_PER_PIXEL)
-	var targetOffset_m := (global_position.x - TARGET_X) * METERS_PER_PIXEL
-	var velocity_mps := linear_velocity * METERS_PER_PIXEL
+func _update_telemetry(altitude_m: float, targetOffset_m: float, velocity_mps: Vector2, dragForce: Vector2, airDensity: float) -> void:
 	var speed_mps := velocity_mps.length()
 	var dragForce_kn = dragForce/1000.0
 	
@@ -216,6 +220,8 @@ func _update_telemetry(dragForce: Vector2) -> void:
 	VelocityReadOut.text = "Velocity: (%.1f, %.1f) m/s" % [velocity_mps.x, -velocity_mps.y]
 	SpeedReadOut.text = "Speed: %.1f m/s" % speed_mps
 	DragForceReadOut.text = "Drag Force: (%.1f, %.1f) kN" % [dragForce_kn.x, -dragForce_kn.y]
+	AirDensityReadOut.text = "Air Density: %.3f kg/m^3" % [airDensity]
+	
 	
 # Random Failures
 
