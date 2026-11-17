@@ -11,25 +11,20 @@ signal throttleTelemetry
 @export var engines: int = 0
 @export var dryMass: float = 100000.0
 
-# Print the runtime setting and the cause of each win/loss.
 @export var debugFailures: bool = true
-
-# false = no random failures. Collisions can still cause a loss.
 @export var enableRandomFailures: bool = false:
 	set(value):
 		if enableRandomFailures == value:
 			return
-
+		
 		enableRandomFailures = value
-
-		# @onready references are unavailable during initialization.
+		
 		if not is_node_ready() or _finished:
 			return
-
+		
 		failure_start_timer.stop()
 		failure_timer.stop()
-
-		# Enabling during flight starts a fresh cooldown.
+		
 		if enableRandomFailures:
 			failure_start_timer.start()
 
@@ -38,12 +33,10 @@ const DRAG_COEFFICIENT: float = 441.0
 const TELEMETRY_INTERVAL: float = 0.1
 const FAILURE_CHECK_INTERVAL: float = 5.0
 
-# Percentage points per second; matches the old rate at 60 ticks/s.
 const THROTTLE_CHANGE_RATE: float = 60.0
-
-# Propellant units per second, per engine, at 100% throttle.
 const FUEL_BURN_RATE: float = 60.0
 
+const MAX_CATCH_SPEED_MPS: float = 10.0
 const FAILURE_SCENE: String = "res://failure.tscn"
 const SUCCESS_SCENE: String = "res://success.tscn"
 const FAILURE_STAGES := [3, 5, 8, 11, 13, 16]
@@ -51,7 +44,7 @@ const FAILURE_STAGES := [3, 5, 8, 11, 13, 16]
 # WORLD SCALE
 const METERS_PER_PIXEL: float = 60.0 / 158.0
 const GROUND_Y: float = 1015.0
-const TARGET_X: float = 1014.0
+const TARGET_X: float = 1012.0
 
 # PHYSICS
 var power: float = 500000.0
@@ -257,7 +250,6 @@ func _physics_process(delta: float) -> void:
 		_update_telemetry(drag_force)
 
 
-
 # ENGINE VISUALS AND AUDIO
 func _update_engine_indicators() -> void:
 	for i in range(engine_indicators.size()):
@@ -314,7 +306,7 @@ func _update_telemetry(drag_magnitude: float) -> void:
 func _on_failure_start_timer_timeout() -> void:
 	if _finished or not enableRandomFailures:
 		return
-
+	
 	# The first check occurs five seconds after the cooldown ends.
 	if failure_timer.is_stopped():
 		failure_timer.start()
@@ -391,7 +383,11 @@ func _on_tower_area_body_entered(body: Node2D) -> void:
 
 func _on_chopsticks_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("fwd"):
-		_finish(true, "Chopsticks catch")
+		var speed_mps := linear_velocity.length() * METERS_PER_PIXEL
+		if speed_mps < MAX_CATCH_SPEED_MPS:
+			_finish(true, "Chopsticks catch")
+		else:
+			_finish(false, "Chopsticks collision")
 
 
 # SCENE TRANSITIONS
