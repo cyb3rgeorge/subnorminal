@@ -7,7 +7,7 @@ signal propTelemetry
 signal throttleTelemetry
 
 # Ship Configurations
-@export var maxProp : int = 3000
+@export var maxProp : int = 4000
 @export var throttle : float = 0.0
 @export var engines : int = 0
 @export var dryMass : float = 150000.0
