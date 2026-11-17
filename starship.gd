@@ -7,7 +7,7 @@ signal propTelemetry
 signal throttleTelemetry
 
 # Ship Configurations
-@export var maxProp : int = 2000
+@export var maxProp : int = 3000
 @export var throttle : float = 0.0
 @export var engines : int = 0
 @export var dryMass : float = 150000.0
@@ -32,7 +32,7 @@ const TELEMETRY_INTERVAL : float = 0.1
 const THROTTLE_CHANGE_RATE: float = 60.0
 const FUEL_BURN_RATE: float = 60.0
 
-const MAX_CATCH_SPEED_MPS: float = 10.0
+const MAX_CATCH_SPEED_MPS: float = 5.0
 
 # Simulation Scale
 const METERS_PER_PIXEL: float = 54.0 / 158.0
@@ -40,7 +40,7 @@ const TARGET_X: float = 1012.0
 const GROUND_Y: float = 1015.0
 
 # Physics
-var power : float = 500000.0
+var power : float = 800000.0
 var angularPower : float = 500.0
 var prop: float = 0.0
 var thrust = Vector2.ZERO
