@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dv2oggy0s7wb1"]
 
-[ext_resource type="VideoStream" uid="uid://w5un83wtxobo" path="res://media/shipCatch.ogv" id="1_wfgo7"]
+[ext_resource type="VideoStream" uid="uid://clv4ucxtypajy" path="res://media/shipCatch1080.ogv" id="1_wfgo7"]
 
 [sub_resource type="GDScript" id="GDScript_5wfv7"]
 script/source = "extends Node2D
