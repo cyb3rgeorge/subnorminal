@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://8g5al6uygjdn"]
+[gd_scene format=3 uid="uid://by7j03igxkmx8"]
 
-[ext_resource type="Script" path="res://menu.gd" id="1_e0arn"]
+[ext_resource type="Script" uid="uid://qf1ergsb8pai" path="res://menu.gd" id="1_e0arn"]
 [ext_resource type="Texture2D" uid="uid://rjxyt5iu46v4" path="res://media/menuPicture.jpg" id="2_037ec"]
 [ext_resource type="AudioStream" uid="uid://ds5un1he0j7nu" path="res://media/Arcadia.mp3" id="3_y1o0p"]
 
