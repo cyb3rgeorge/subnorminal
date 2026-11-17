@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bpewqquya7kue"]
 
 [ext_resource type="Script" uid="uid://bw3qik1luvw6a" path="res://starship.gd" id="1_agxhv"]
-[ext_resource type="Texture2D" uid="uid://wf3hc48n7f5q" path="res://media/sky2.png" id="2_rlt7b"]
+[ext_resource type="Texture2D" uid="uid://wf3hc48n7f5q" path="res://media/sky.png" id="2_rlt7b"]
 [ext_resource type="Script" uid="uid://cx2qgefp2ad13" path="res://propGauge.gd" id="3_hk0ex"]
 [ext_resource type="Texture2D" uid="uid://c47ipy74s0tk6" path="res://media/starship.png" id="3_kvxyv"]
 [ext_resource type="Texture2D" uid="uid://bntt87ui0xi1r" path="res://media/raptor1.png" id="4_3yo5x"]
