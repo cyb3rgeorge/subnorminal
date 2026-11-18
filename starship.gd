@@ -33,10 +33,10 @@ const TELEMETRY_INTERVAL : float = 0.1
 const THROTTLE_CHANGE_RATE: float = 60.0
 const FUEL_BURN_RATE: float = 60.0
 
-const MAX_CATCH_SPEED_MPS: float = 5.0
+const MAX_CATCH_SPEED_MPS: float = 10.0
 
 # Simulation Scale
-const METERS_PER_PIXEL: float = 54.0 / 158.0
+const METERS_PER_PIXEL: float = 54.0 / 208.0
 const TARGET_X: float = 1012.0
 const GROUND_Y: float = 1015.0
 
@@ -62,8 +62,10 @@ var _wasBurning : bool = false
 
 # Effects
 @onready var raptorRoar = $"../raptorRoar"
-@onready var flameLow: CanvasItem = $RaptorThrottle1
-@onready var flameHigh: CanvasItem = $RaptorThrottle2
+@onready var enginePlume1: CanvasItem = $EnginePlume1
+@onready var enginePlume2: CanvasItem = $EnginePlume2
+@onready var enginePlume3: CanvasItem = $EnginePlume3
+@onready var enginePlume4: CanvasItem = $EnginePlume4
 
 # Telemetry Nodes
 @onready var EngineIndicators: Array[CanvasItem] = [
@@ -203,8 +205,10 @@ func _update_engine_indicators() -> void:
 
 
 func _update_effects(burning: bool) -> void:
-	flameLow.visible = burning and throttle <= 50.0
-	flameHigh.visible = burning and throttle > 50.0
+	enginePlume1.visible = burning and throttle > 0.0
+	enginePlume2.visible = burning and throttle > 25.0
+	enginePlume3.visible = burning and throttle > 50.0
+	enginePlume4.visible = burning and throttle > 75.0
 	
 	if burning and not _wasBurning:
 		raptorRoar.play()

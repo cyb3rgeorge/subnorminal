@@ -2,9 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://wf3hc48n7f5q" path="res://media/sky.png" id="1_wijme"]
 [ext_resource type="Script" uid="uid://bw3qik1luvw6a" path="res://starship.gd" id="2_tdqyt"]
-[ext_resource type="Texture2D" uid="uid://bntt87ui0xi1r" path="res://media/raptor1.png" id="3_qcnq3"]
-[ext_resource type="Texture2D" uid="uid://dvgh7soxnynsq" path="res://media/raptor2.png" id="4_xneng"]
-[ext_resource type="Texture2D" uid="uid://c47ipy74s0tk6" path="res://media/starship.png" id="5_i1xrq"]
+[ext_resource type="Texture2D" uid="uid://cio2h1f15bwbu" path="res://media/enginePlume1.png" id="3_qcnq3"]
+[ext_resource type="Texture2D" uid="uid://bm1penn2hf2pu" path="res://media/enginePlume2.png" id="4_xneng"]
+[ext_resource type="Texture2D" uid="uid://dw8wywh6jublf" path="res://media/starship.png" id="5_i1xrq"]
+[ext_resource type="Texture2D" uid="uid://naggk6nv75rq" path="res://media/enginePlume3.png" id="5_t68on"]
+[ext_resource type="Texture2D" uid="uid://04sv8p5id7ai" path="res://media/enginePlume4.png" id="6_4s7bp"]
 [ext_resource type="Script" uid="uid://b1akmwma3e6rw" path="res://camera2d.gd" id="6_t68on"]
 [ext_resource type="Script" uid="uid://cx2qgefp2ad13" path="res://propGauge.gd" id="7_4s7bp"]
 [ext_resource type="Script" uid="uid://cg4gxkpa12mpb" path="res://throttle.gd" id="8_wd3sr"]
@@ -12,13 +14,13 @@
 [ext_resource type="Texture2D" uid="uid://tmtv7bylagwc" path="res://media/ship2.png" id="10_ur0sc"]
 [ext_resource type="Texture2D" uid="uid://ccg11wl57j05n" path="res://media/ship1.png" id="11_k8tmk"]
 [ext_resource type="Texture2D" uid="uid://bv66xpmy23g1c" path="res://media/ship0.png" id="12_mnur8"]
-[ext_resource type="Texture2D" uid="uid://c04miqp2afsji" path="res://media/tower.png" id="13_h6gh2"]
-[ext_resource type="Texture2D" uid="uid://d10s5uv25b8np" path="res://media/chopsticks.png" id="14_fqtql"]
+[ext_resource type="Texture2D" uid="uid://pby1h38n4hmm" path="res://media/tower.png" id="13_tdqyt"]
+[ext_resource type="Texture2D" uid="uid://c2lnqqn1f1n6i" path="res://media/chopsticks.png" id="14_qcnq3"]
 [ext_resource type="Texture2D" uid="uid://f1rduu3r0cgh" path="res://media/ground.png" id="15_pivg5"]
 [ext_resource type="AudioStream" uid="uid://cptb471thjitf" path="res://media/raptorFiring.wav" id="16_tns8l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bwct"]
-size = Vector2(6.9960938, 31.00177)
+size = Vector2(35.99968, 3.0000496)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4y73a"]
 bg_color = Color(0.39215687, 0.39215687, 0.39215687, 1)
@@ -49,7 +51,7 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3mne7"]
-size = Vector2(76.25, 3.5)
+size = Vector2(41, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5wfv7"]
 size = Vector2(17731.625, 282.08618)
@@ -57,14 +59,14 @@ size = Vector2(17731.625, 282.08618)
 [node name="Node2D" type="Node2D" unique_id=1745848919]
 
 [node name="Sky" type="Sprite2D" parent="." unique_id=1427529558]
-position = Vector2(211.75781, -5117.336)
+position = Vector2(207.00002, -5117)
 rotation = 3.1351771
 scale = Vector2(40.23882, -2.263264)
 texture = ExtResource("1_wijme")
 
 [node name="Starship" type="RigidBody2D" parent="." unique_id=1724685367]
 position = Vector2(568.0001, -3162)
-rotation = 3.137519
+rotation = 3.1415927
 mass = 150000.0
 inertia = 1000.0
 can_sleep = false
@@ -72,37 +74,58 @@ freeze_mode = 1
 linear_velocity = Vector2(0, 500)
 script = ExtResource("2_tdqyt")
 
-[node name="RaptorThrottle1" type="Sprite2D" parent="Starship" unique_id=1863118857]
+[node name="EnginePlume1" type="Sprite2D" parent="Starship" unique_id=192035588]
 visible = false
-position = Vector2(102.999084, 0.4194336)
-rotation = 1.6013705
+texture_filter = 1
+position = Vector2(124.00009, 0)
+rotation = 3.1415925
 texture = ExtResource("3_qcnq3")
 
-[node name="RaptorThrottle2" type="Sprite2D" parent="Starship" unique_id=1949635948]
+[node name="EnginePlume2" type="Sprite2D" parent="Starship" unique_id=254225912]
 visible = false
-position = Vector2(127.99896, 0.52124023)
-rotation = 1.6030564
-scale = Vector2(1.0000001, 1.0000001)
+texture_filter = 1
+position = Vector2(144.00009, 0)
+rotation = 3.1415925
 texture = ExtResource("4_xneng")
 
-[node name="StarshipImage" type="Sprite2D" parent="Starship" unique_id=1824359622]
-position = Vector2(-2.37301e-06, 2.7894974e-05)
+[node name="EnginePlume3" type="Sprite2D" parent="Starship" unique_id=375558163]
+visible = false
+texture_filter = 1
+position = Vector2(164.00009, 0)
+rotation = 3.1415925
+texture = ExtResource("5_t68on")
+
+[node name="EnginePlume4" type="Sprite2D" parent="Starship" unique_id=1096647722]
+visible = false
+texture_filter = 1
+position = Vector2(184.00009, 0)
+rotation = 3.1415925
+texture = ExtResource("6_4s7bp")
+
+[node name="Starship" type="Sprite2D" parent="Starship" unique_id=555005580]
+texture_filter = 1
+position = Vector2(0.00012207031, 0)
 rotation = -1.5707964
-scale = Vector2(2, 2)
+scale = Vector2(1.0000001, 1.0000001)
 texture = ExtResource("5_i1xrq")
 
 [node name="Camera2D" type="Camera2D" parent="Starship" unique_id=2094013215]
+position = Vector2(0.00012198289, -1)
+zoom = Vector2(0.75, 0.75)
 limit_enabled = false
 position_smoothing_speed = 10.0
 script = ExtResource("6_t68on")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Starship" unique_id=1983826992]
-polygon = PackedVector2Array(-78.00604, -0.24401855, -53.142853, -14.485718, -47.220703, -22.543518, -36.221222, -22.650085, -36.1243, -12.650513, 42.87201, -13.416138, 53.755188, -25.522217, 78.754, -25.764465, 79.24826, 25.233154, 53.24948, 25.485107, 42.133698, 13.592285, -35.88202, 12.348328, -35.785126, 22.34784, -35.785126, 22.34784, -46.784607, 22.454407, -54.87143, 13.53241, -77.99634, 0.7559204)
+position = Vector2(0.0001220693, 4.972851e-07)
+rotation = 1.5669318
+polygon = PackedVector2Array(-0.40185547, 103.99921, -18.278076, 71.92993, -17.5979, -104.06879, 18.401855, -103.92966, 17.72168, 72.06903)
 
 [node name="Area2DFwd" type="Area2D" parent="Starship" unique_id=55732293 groups=["fwd"]]
+rotation = 1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Starship/Area2DFwd" unique_id=838277218]
-position = Vector2(-35.999554, -0.14673257)
+position = Vector2(0, 53)
 shape = SubResource("RectangleShape2D_8bwct")
 
 [node name="Telemetry" type="CanvasLayer" parent="." unique_id=65945142]
@@ -259,25 +282,25 @@ wait_time = 5.0
 
 [node name="TowerArea" type="Area2D" parent="." unique_id=1781511207]
 
-[node name="Tower" type="Sprite2D" parent="TowerArea" unique_id=428413086]
-position = Vector2(935.00006, 810.00006)
-scale = Vector2(1.743, 1.743)
-texture = ExtResource("13_h6gh2")
+[node name="Tower" type="Sprite2D" parent="TowerArea" unique_id=1800599003]
+texture_filter = 1
+position = Vector2(923, 728)
+texture = ExtResource("13_tdqyt")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TowerArea" unique_id=245403023]
 position = Vector2(927, 726)
-polygon = PackedVector2Array(28, -98, 29, 289, -39, 289, -39, 259, -20, 259, -20, -120, 41, -120, 41, -98)
+polygon = PackedVector2Array(-41, -284, 46, -284, 46, -261, 30, -261, 30, -235, 46, -235, 46, -169, 30, -169, 30, 289, -57, 289, -57, 260, -41, 245)
 
 [node name="ChopsticksArea" type="Area2D" parent="." unique_id=1521499371]
 position = Vector2(-3, -57)
 
-[node name="Chopsticks" type="Sprite2D" parent="ChopsticksArea" unique_id=290342387]
-position = Vector2(992.99994, 721)
-scale = Vector2(1.7, 1.7)
-texture = ExtResource("14_fqtql")
+[node name="Chopsticks" type="Sprite2D" parent="ChopsticksArea" unique_id=597780006]
+texture_filter = 1
+position = Vector2(992, 581)
+texture = ExtResource("14_qcnq3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChopsticksArea" unique_id=1782389773]
-position = Vector2(1005.875, 697.25)
+position = Vector2(1030.5, 548.5)
 shape = SubResource("RectangleShape2D_3mne7")
 
 [node name="Land" type="Area2D" parent="." unique_id=1206827131]
