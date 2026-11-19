@@ -23,8 +23,13 @@ Find us on itch.io! https://cyb3rgeorge.itch.io/subnorminal
 
 Credits to George's 48 hours of sleep deprivation. 
 
-Image credit: SpaceX, Ars Technica
-Video credit: SpaceX
-Music credit: Kevin MacLeod
+Audio: SpaceX
+Music: Kevin MacLeod
+Video: SpaceX
 
 Assisted by Limeetha Sai and Isaac.
+
+
+<a href="https://github.com/cyb3rgeorge/subnorminal">Subnorminal</a> (c) 2026 by <a href="https://github.com/cyb3rgeorge">cyb3rgeorge</a> is licensed under the MIT License
+
+The art for <a href="https://github.com/cyb3rgeorge/subnorminal">Subnorminal</a> (c) 2026 by <a href="https://github.com/cyb3rgeorge">cyb3rgeorge</a> and <a href="https://github.com/limeethasaias">Limeetha Sai</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>
