@@ -190,7 +190,8 @@ func _physics_process (delta):
 	#print("Net Force: ", netForce)
 	
 	# Rotation
-	constant_torque = rotationalDirection * angularPower * (engines + 1)
+	constant_torque = rotationalDirection * angularPower * (enginePower+1)
+	
 	
 	# Engine Effects
 	_update_effects(burning and prop > 0.0)

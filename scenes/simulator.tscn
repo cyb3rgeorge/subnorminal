@@ -200,7 +200,7 @@ offset_bottom = 681.0
 theme_override_font_sizes/font_size = 24
 text = "Altitude: Standby for Acquisition of Signal
 Target Offset: Standby for Acquisition of Signal
-Veloctiy: Standby for Acquisition of Signal
+Velocity: Standby for Acquisition of Signal
 Speed: Standby for Acquisition of Signal
 Drag Force: Standby for Acquisition of Signal
 Air Density: Standby for Acquisition of Signal
