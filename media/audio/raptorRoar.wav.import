@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cptb471thjitf"
-path="res://.godot/imported/raptorRoar.wav-f23a20354be7beb7ef425a33b68018ad.sample"
+path="res://.godot/imported/raptorRoar.wav-f62730b8241b8f66634fa328fe2960da.sample"
 
 [deps]
 
-source_file="res://media/raptorRoar.wav"
-dest_files=["res://.godot/imported/raptorRoar.wav-f23a20354be7beb7ef425a33b68018ad.sample"]
+source_file="res://media/audio/raptorRoar.wav"
+dest_files=["res://.godot/imported/raptorRoar.wav-f62730b8241b8f66634fa328fe2960da.sample"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brtlyg75dsqc8"
-path="res://.godot/imported/cacacaGrey.png-580e69835139f470c786caf4866bf081.ctex"
+uid="uid://caywmqxs4hsxs"
+path="res://.godot/imported/ship3.png-758146c5bc23367da7e2f47d4a71633f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://media/cacacaGrey.png"
-dest_files=["res://.godot/imported/cacacaGrey.png-580e69835139f470c786caf4866bf081.ctex"]
+source_file="res://media/shipEngine/ship3.png"
+dest_files=["res://.godot/imported/ship3.png-758146c5bc23367da7e2f47d4a71633f.ctex"]
 
 [params]
 

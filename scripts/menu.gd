@@ -7,8 +7,10 @@ func _ready():
 	$Control/Counter.text = ("Norminals: " + str(Global.norminals) + "\nSubnorminals: " +str(Global.subnorminals))
 	
 	if Global.audio:
+		$Control/Mute.text = "Mute All Audio"
 		$menuMusic.play()
 	else:
+		$Control/Mute.text = "Unmute All Audio"
 		$menuMusic.stop()
 		$raptorRoar.stop()
 	
@@ -36,5 +38,5 @@ func _on_mute_pressed() -> void:
 		_ready()
 	else:
 		Global.audio = true
-		$Control/Mute.text = "Mute All Sound"
+		$Control/Mute.text = "Mute All Audio"
 		_ready()

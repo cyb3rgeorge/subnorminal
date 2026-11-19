@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bm1penn2hf2pu"
-path="res://.godot/imported/enginePlume2.png-dbaefd5bdbc762c8db244f0a66014a5d.ctex"
+uid="uid://naggk6nv75rq"
+path="res://.godot/imported/enginePlume3.png-a6738305e161977c75ba9c0856bd8da2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://media/enginePlume2.png"
-dest_files=["res://.godot/imported/enginePlume2.png-dbaefd5bdbc762c8db244f0a66014a5d.ctex"]
+source_file="res://media/enginePlume/enginePlume3.png"
+dest_files=["res://.godot/imported/enginePlume3.png-a6738305e161977c75ba9c0856bd8da2.ctex"]
 
 [params]
 

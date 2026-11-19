@@ -14,9 +14,9 @@ signal throttleTelemetry
 @export var dryMass: float = 150000.0
 
 # Failures
-@export var enableRandomFailures: bool = false
-const FAILURE_STAGES := [3, 5, 8, 11, 13, 16]
-var failureThreshold := 21.0
+@export var enableRandomFailures: bool = true
+const FAILURE_STAGES := [2, 4, 6, 8, 10]
+var failureThreshold := 27.0
 
 # CONSTANTS
 const GRAVITATIONAL_ACCELERATION: float = 9.80665 # / m s^-2
@@ -261,42 +261,44 @@ func _on_failure_start_timer_timeout() -> void:
 	FailureTimer.start()
 
 func _on_failure_timer_timeout() -> void:
-	failureThreshold = 21.0
-	
 	for stage in FAILURE_STAGES:
 		if Global.subnorminals >= stage:
 			failureThreshold += 3.0
+			
 		else:
 			break
 	
 	var failureNumber = randomNumberGenerator.randf_range(0.0, 42.0)
 	
+	#print(Global.subnorminals)
+	#print(failureThreshold)
 	#print(failureNumber)
+	
 	if failureNumber > failureThreshold:
-		_finish(false, "Rapid unscheduled disassembly (RUD)")
+		_finish(false, "Rapid Unscheduled Disassembly (RUD)\nRUDs are more likely to occur when Starship has failed \nonly a few times. As the number of failures increase, \nthe probability of RUDs decrease.")
 	
 	
 # Collision Detection
 	
 func _on_land_body_entered(body: Node2D) -> void:
 	if body == self:
-		_finish(false, "Ground collision")
+		_finish(false, "Ground Collision")
 
 func _on_tower_area_body_entered(body: Node2D) -> void:
 	if body == self:
-		_finish(false, "Tower collision")
+		_finish(false, "Tower Collision")
 		
 func _on_bounds_body_entered(body: Node2D) -> void:
 	if body == self:
-		_finish(false, "Range exceeded")
+		_finish(false, "Flight Terminated: Range Exceeded")
 	
 func _on_chopsticks_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("fwd"):
 		var speed_mps := linear_velocity.length() * METERS_PER_PIXEL
 		if speed_mps < MAX_CATCH_SPEED_MPS:
-			_finish(true, "Chopsticks catch")
+			_finish(true, "Chopsticks Catch")
 		else:
-			_finish(false, "Chopsticks collision")
+			_finish(false, "Chopsticks Collision")
 
 
 # Finish

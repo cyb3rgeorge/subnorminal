@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://b7eul8pt1rrlc"
-path="res://.godot/imported/ahln_medium.ttf-e97c2968813230103d47caee73f9234a.fontdata"
+path="res://.godot/imported/ahln_medium.ttf-7747813245b1aabbd0e36185fe82fe3d.fontdata"
 
 [deps]
 
-source_file="res://Atkinson_Hyperlegible_Next/static/ahln_medium.ttf"
-dest_files=["res://.godot/imported/ahln_medium.ttf-e97c2968813230103d47caee73f9234a.fontdata"]
+source_file="res://Atkinson_Hyperlegible_Next/ahln_medium.ttf"
+dest_files=["res://.godot/imported/ahln_medium.ttf-7747813245b1aabbd0e36185fe82fe3d.fontdata"]
 
 [params]
 

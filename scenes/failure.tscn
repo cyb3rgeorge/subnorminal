@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dw8wywh6jublf" path="res://media/starship.png" id="1_fi0pi"]
 [ext_resource type="Texture2D" uid="uid://16et33f6t0vg" path="res://media/ebebebGray.png" id="1_orauc"]
-[ext_resource type="FontFile" uid="uid://b7eul8pt1rrlc" path="res://Atkinson_Hyperlegible_Next/static/ahln_medium.ttf" id="2_orauc"]
+[ext_resource type="FontFile" uid="uid://b7eul8pt1rrlc" path="res://Atkinson_Hyperlegible_Next/ahln_medium.ttf" id="2_orauc"]
 
 [sub_resource type="GDScript" id="GDScript_5wfv7"]
 script/source = "extends Node2D
@@ -34,9 +34,9 @@ texture = ExtResource("1_orauc")
 layout_mode = 3
 anchors_preset = 0
 offset_left = 780.0
-offset_top = 250.0
+offset_top = 200.0
 offset_right = 820.0
-offset_bottom = 290.0
+offset_bottom = 240.0
 
 [node name="LoS" type="Label" parent="Control" unique_id=1453258130]
 layout_mode = 0
@@ -64,18 +64,18 @@ Subnorminals: 0"
 [node name="Restart" type="Button" parent="Control" unique_id=1304027761]
 layout_mode = 0
 offset_left = 140.94836
-offset_top = 390.9579
+offset_top = 506.9579
 offset_right = 292.94836
-offset_bottom = 455.13818
+offset_bottom = 571.1382
 theme_override_font_sizes/font_size = 32
 text = "Restart"
 
 [node name="Menu" type="Button" parent="Control" unique_id=1063262527]
 layout_mode = 0
 offset_left = 318.94836
-offset_top = 390.9579
+offset_top = 506.9579
 offset_right = 446.94836
-offset_bottom = 455.13818
+offset_bottom = 571.1382
 theme_override_font_sizes/font_size = 32
 text = "Menu"
 
