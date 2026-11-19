@@ -276,7 +276,7 @@ func _on_failure_timer_timeout() -> void:
 	#print(failureNumber)
 	
 	if failureNumber > failureThreshold:
-		_finish(false, "Rapid Unscheduled Disassembly (RUD)\nRUDs are more likely to occur when Starship has failed \nonly a few times. As the number of failures increase, \nthe probability of RUDs decrease.")
+		_finish(false, "Rapid Unscheduled Disassembly (RUD)\nRUDs are more likely to occur when Starship has failed \nonly a few times. As the number of subnorminal attempts increase, \nthe probability of RUDs decrease.")
 	
 	
 # Collision Detection
