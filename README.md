@@ -3,7 +3,34 @@ Inspired by the journey of humanity to earn our place among the stars, we start 
 
 With realistic physics!
 
-Note: Rocket may explode randomly (intentional), 'cause space is hard!
+Find us on itch.io! https://cyb3rgeorge.itch.io/subnorminal
+
+## Features & Mechanics
+1. Propulsion system
+2. Flight controls (throttle, pitch, engine selection)
+3. Real-time telemetry
+4. Propellant consumption (propellant has mass!)
+5. Atmospheric drag along both the x- and y-axes
+6. Dynamic air density based on altitude
+7. Engine visuals and audio
+8. Adjustable camera zoom
+
+Apply your knowledge of physics and Starship to win!
+
+### Norminal Catch Condition
+Get caught by Mechazilla (the launch tower)'s chopstick arms with a speed no more than 10 m/s. Catch pins on Starship are slightly under the forward flaps, and the damping rails on Mechazilla are on top of the far end of the chopsticks, just like in real life!
+
+### Notes
+1. Rapid unscheduled disassemblies (RUDs) initially occur with the random probability of 64% per 5 seconds. When the number of subnorminal attempts increase, the probability of a RUD decreases, dropping to 0% at 10 subnorminal attempts.
+2. The flaps on Starship does _not_ contribute to its hitbox.
+
+### Common Mistake
+To produce thrust,
+1. at least one engine must be activated, 
+2. throttle must be more than zero, and
+3. propellant must be more than zero.
+
+If all three conditions are _not_ met, no thrust will be produced.
 
 ## Controls
 | Input | Function|
@@ -46,9 +73,6 @@ Note: Rocket may explode randomly (intentional), 'cause space is hard!
 | S | Throttle down |
 | A | Pitch up |
 | D| Pitch down |
-
-
-Find us on itch.io! https://cyb3rgeorge.itch.io/subnorminal
 
 ## Attribution & Licenses
 Credits to George's 48 hours of sleep deprivation (and further locking in after the hackathon). \
