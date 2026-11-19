@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cptb471thjitf"
-path="res://.godot/imported/raptorFiring.wav-17f31c3f9e4554897556b77fe0a54eb6.sample"
+path="res://.godot/imported/raptorRoar.wav-f23a20354be7beb7ef425a33b68018ad.sample"
 
 [deps]
 
-source_file="res://media/raptorFiring.wav"
-dest_files=["res://.godot/imported/raptorFiring.wav-17f31c3f9e4554897556b77fe0a54eb6.sample"]
+source_file="res://media/raptorRoar.wav"
+dest_files=["res://.godot/imported/raptorRoar.wav-f23a20354be7beb7ef425a33b68018ad.sample"]
 
 [params]
 

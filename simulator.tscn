@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://pby1h38n4hmm" path="res://media/tower.png" id="13_tdqyt"]
 [ext_resource type="Texture2D" uid="uid://c2lnqqn1f1n6i" path="res://media/chopsticks.png" id="14_qcnq3"]
 [ext_resource type="Texture2D" uid="uid://f1rduu3r0cgh" path="res://media/ground.png" id="15_pivg5"]
-[ext_resource type="AudioStream" uid="uid://cptb471thjitf" path="res://media/raptorFiring.wav" id="16_tns8l"]
+[ext_resource type="AudioStream" uid="uid://cptb471thjitf" path="res://media/raptorRoar.wav" id="16_tns8l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bwct"]
 size = Vector2(35.99968, 3.0000496)
@@ -54,24 +54,24 @@ corner_radius_bottom_left = 8
 size = Vector2(41, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5wfv7"]
-size = Vector2(17731.625, 282.08618)
+size = Vector2(17731.625, 316.0431)
 
 [node name="Node2D" type="Node2D" unique_id=1745848919]
 
 [node name="Sky" type="Sprite2D" parent="." unique_id=1427529558]
-position = Vector2(207.00002, -5117)
+position = Vector2(1042.0723, -7337.121)
 rotation = 3.1351771
-scale = Vector2(40.23882, -2.263264)
+scale = Vector2(11.387823, -2.9790745)
 texture = ExtResource("1_wijme")
 
 [node name="Starship" type="RigidBody2D" parent="." unique_id=1724685367]
-position = Vector2(568.0001, -3162)
+position = Vector2(-668, -5428)
 rotation = 3.1415927
 mass = 150000.0
 inertia = 1000.0
 can_sleep = false
 freeze_mode = 1
-linear_velocity = Vector2(0, 500)
+linear_velocity = Vector2(50, 500)
 script = ExtResource("2_tdqyt")
 
 [node name="EnginePlume1" type="Sprite2D" parent="Starship" unique_id=192035588]
@@ -111,7 +111,7 @@ texture = ExtResource("5_i1xrq")
 
 [node name="Camera2D" type="Camera2D" parent="Starship" unique_id=2094013215]
 position = Vector2(0.00012198289, -1)
-zoom = Vector2(0.75, 0.75)
+zoom = Vector2(0.6, 0.6)
 limit_enabled = false
 position_smoothing_speed = 10.0
 script = ExtResource("6_t68on")
@@ -188,68 +188,20 @@ offset_bottom = 26.0
 theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
 text = "Throttle"
 
-[node name="Altimeter" type="Label" parent="Telemetry/Control" unique_id=389722824]
+[node name="TelemetryReadOuts" type="Label" parent="Telemetry/Control" unique_id=389722824]
 layout_mode = 0
 offset_left = 40.0
-offset_top = 438.0
+offset_top = 439.0
 offset_right = 361.0
-offset_bottom = 461.0
+offset_bottom = 462.0
 scale = Vector2(1.5, 1.5)
-text = "Altitude: Standby for Acquisition of Signal"
-
-[node name="TargetOffset" type="Label" parent="Telemetry/Control" unique_id=874698171]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 478.0
-offset_right = 400.0
-offset_bottom = 501.0
-scale = Vector2(1.5, 1.5)
-text = "Target Offset: Standby for Acquisition of Signal"
-
-[node name="Velocity" type="Label" parent="Telemetry/Control" unique_id=258425340]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 517.0
-offset_right = 400.0
-offset_bottom = 540.0
-scale = Vector2(1.5, 1.5)
-text = "Velocity: Standby for Acquisition of Signal"
-
-[node name="Speed" type="Label" parent="Telemetry/Control" unique_id=1969566577]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 557.0
-offset_right = 400.0
-offset_bottom = 580.0
-scale = Vector2(1.5, 1.5)
-text = "Speed: Standby for Acquisition of Signal"
-
-[node name="DragForce" type="Label" parent="Telemetry/Control" unique_id=1794164637]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 594.0
-offset_right = 400.0
-offset_bottom = 617.0
-scale = Vector2(1.5, 1.5)
-text = "Drag Force: Standby for Acquisition of Signal"
-
-[node name="AirDensity" type="Label" parent="Telemetry/Control" unique_id=2063116812]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 630.0
-offset_right = 400.0
-offset_bottom = 653.0
-scale = Vector2(1.5, 1.5)
-text = "Air Density: Standby for Acquisition of Signal"
-
-[node name="WetMass" type="Label" parent="Telemetry/Control" unique_id=1966171986]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 668.0
-offset_right = 400.0
-offset_bottom = 691.0
-scale = Vector2(1.5, 1.5)
-text = "Mass: Standby for Acquisition of Signal"
+text = "Altitude: Standby for Acquisition of Signal
+Target Offset: Standby for Acquisition of Signal
+Veloctiy: Standby for Acquisition of Signal
+Speed: Standby for Acquisition of Signal
+Drag Force: Standby for Acquisition of Signal
+Air Density: Standby for Acquisition of Signal
+Wet Mass: Standby for Acquisition of Signal"
 
 [node name="3Engines" type="Sprite2D" parent="Telemetry" unique_id=968264892]
 visible = false
@@ -303,28 +255,30 @@ texture = ExtResource("14_qcnq3")
 position = Vector2(1030.5, 548.5)
 shape = SubResource("RectangleShape2D_3mne7")
 
-[node name="Land" type="Area2D" parent="." unique_id=1206827131]
-position = Vector2(-10, 1120)
+[node name="Bounds" type="Area2D" parent="." unique_id=2014127249]
 
-[node name="Ground" type="Sprite2D" parent="Land" unique_id=1673512014]
-position = Vector2(339, 5379)
-scale = Vector2(167.20169, 23.044073)
-texture = ExtResource("15_pivg5")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Land" unique_id=2131039566]
-position = Vector2(7275, -8608.001)
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Bounds" unique_id=2131039566]
+position = Vector2(9562.001, -7209.001)
 rotation = -1.5714247
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_5wfv7")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Land" unique_id=273992061]
-position = Vector2(-5446, -8856)
-rotation = 1.5662671
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Bounds" unique_id=273992061]
+position = Vector2(-7726, -7070)
+rotation = 1.5707964
 shape = SubResource("RectangleShape2D_5wfv7")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Land" unique_id=480737914]
-position = Vector2(920, -11199)
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Bounds" unique_id=480737914]
+position = Vector2(798, -11546)
 shape = SubResource("RectangleShape2D_5wfv7")
+
+[node name="Land" type="Area2D" parent="." unique_id=1206827131]
+position = Vector2(-10, 1120)
+
+[node name="Ground" type="Sprite2D" parent="Land" unique_id=1673512014]
+position = Vector2(1000.49805, 5379)
+scale = Vector2(41.94586, 23.044073)
+texture = ExtResource("15_pivg5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Land" unique_id=333878887]
 position = Vector2(940, 39)
@@ -339,4 +293,5 @@ stream = ExtResource("16_tns8l")
 [connection signal="timeout" from="FailureTimer" to="Starship" method="_on_failure_timer_timeout"]
 [connection signal="body_entered" from="TowerArea" to="Starship" method="_on_tower_area_body_entered"]
 [connection signal="area_entered" from="ChopsticksArea" to="Starship" method="_on_chopsticks_area_area_entered"]
-[connection signal="body_entered" from="Land" to="Starship" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Bounds" to="Starship" method="_on_bounds_body_entered"]
+[connection signal="body_entered" from="Land" to="Starship" method="_on_land_body_entered"]

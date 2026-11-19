@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bea3r3iojgsco"
-path="res://.godot/imported/landing.jpg-f4af4c47c52ed7dd4d4584e22bc7d98b.ctex"
+uid="uid://brtlyg75dsqc8"
+path="res://.godot/imported/cacacaGrey.png-580e69835139f470c786caf4866bf081.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://media/landing.jpg"
-dest_files=["res://.godot/imported/landing.jpg-f4af4c47c52ed7dd4d4584e22bc7d98b.ctex"]
+source_file="res://media/cacacaGrey.png"
+dest_files=["res://.godot/imported/cacacaGrey.png-580e69835139f470c786caf4866bf081.ctex"]
 
 [params]
 

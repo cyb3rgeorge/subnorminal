@@ -37,7 +37,7 @@ const MAX_CATCH_SPEED_MPS: float = 10.0
 
 # Simulation Scale
 const METERS_PER_PIXEL: float = 54.0 / 208.0
-const TARGET_X: float = 1012.0
+const TARGET_X: float = 1030.0
 const GROUND_Y: float = 1015.0
 
 # Physics
@@ -74,13 +74,7 @@ var _wasBurning : bool = false
 	$"../Telemetry/2Engines",
 	$"../Telemetry/3Engines"
 ]
-@onready var AltitudeReadOut = $"../Telemetry/Control/Altimeter"
-@onready var TargetOffsetReadOut = $"../Telemetry/Control/TargetOffset"
-@onready var VelocityReadOut = $"../Telemetry/Control/Velocity"
-@onready var SpeedReadOut = $"../Telemetry/Control/Speed"
-@onready var DragForceReadOut = $"../Telemetry/Control/DragForce"
-@onready var AirDensityReadOut = $"../Telemetry/Control/AirDensity"
-@onready var WetMassReadOut = $"../Telemetry/Control/WetMass"
+@onready var TelemetryReadOuts = $"../Telemetry/Control/TelemetryReadOuts"
 
 
 # Initialization
@@ -223,14 +217,15 @@ func _update_telemetry(altitude_m: float, targetOffset_m: float, velocity_mps: V
 	var speed_mps := velocity_mps.length()
 	var dragForce_kn = dragForce/1000.0
 	
-	AltitudeReadOut.text = "Altitude: %.1f m" % altitude_m
-	TargetOffsetReadOut.text = "Target Offset: %+.1f m" % targetOffset_m
-	VelocityReadOut.text = "Velocity: (%.1f, %.1f) m/s" % [velocity_mps.x, -velocity_mps.y]
-	SpeedReadOut.text = "Speed: %.1f m/s" % speed_mps
-	DragForceReadOut.text = "Drag Force: (%.1f, %.1f) kN" % [dragForce_kn.x, -dragForce_kn.y]
-	AirDensityReadOut.text = "Air Density: %.3f kg/m^3" % [airDensity]
-	WetMassReadOut.text = "Air Density: %.0f kg" % [wetMass]
-	
+	TelemetryReadOuts.text = (
+	"Altitude: %.1f m \n" % altitude_m
+	+ "Target Offset: %+.1f m \n" % targetOffset_m
+	+ "Velocity: (%.1f, %.1f) m/s \n" % [velocity_mps.x, -velocity_mps.y]
+	+ "Speed: %.1f m/s \n" % speed_mps
+	+ "Drag Force: (%.1f, %.1f) kN \n" % [dragForce_kn.x, -dragForce_kn.y]
+	+ "Air Density: %.3f kg/m^3 \n" % airDensity
+	+ "Wet Mass: %.0f kg" % wetMass
+	)
 	
 # Random Failures
 
@@ -249,11 +244,10 @@ func _on_failure_timer_timeout() -> void:
 	var failureNumber = randomNumberGenerator.randf_range(0.0, 42.0)
 	
 	if failureNumber > failureThreshold:
-		Global.failures += 1
-		get_tree().change_scene_to_file(Global.FAILURE_SCENE)
+		_finish(false, "Rapid unscheduled disassembly (RUD)")
 
 
-func _finish(won: bool, reason: String = "Unknown") -> void:
+func _finish(won: bool, anomaly: String = "Unknown") -> void:
 	if _finished:
 		return
 	
@@ -263,21 +257,27 @@ func _finish(won: bool, reason: String = "Unknown") -> void:
 	set_deferred("freeze", true)
 	
 	if won:
+		Global.norminals += 1
 		WinEndTimer.start()
+		Global.anomaly = anomaly
 	else:
-		Global.failures += 1
+		Global.subnorminals += 1
 		EndTimer.start()
 	
 	
 # Collision Detection
 	
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_land_body_entered(body: Node2D) -> void:
 	if body == self:
 		_finish(false, "Ground collision")
 
 func _on_tower_area_body_entered(body: Node2D) -> void:
 	if body == self:
 		_finish(false, "Tower collision")
+		
+func _on_bounds_body_entered(body: Node2D) -> void:
+	if body == self:
+		_finish(false, "Range exceeded")
 	
 func _on_chopsticks_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("fwd"):

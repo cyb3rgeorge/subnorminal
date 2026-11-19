@@ -35,6 +35,10 @@ hls=""
 fwd=""
 aft=""
 
+[gui]
+
+theme/custom_font="uid://ds3dyfe280ufy"
+
 [input]
 
 rotateLeft={
