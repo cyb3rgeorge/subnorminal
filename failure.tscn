@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b7aol8r6p7oef"]
 
 [ext_resource type="Texture2D" uid="uid://dw8wywh6jublf" path="res://media/starship.png" id="1_fi0pi"]
-[ext_resource type="Texture2D" uid="uid://brtlyg75dsqc8" path="res://media/cacacaGrey.png" id="1_mir7q"]
+[ext_resource type="Texture2D" uid="uid://16et33f6t0vg" path="res://media/ebebebGray.png" id="1_orauc"]
 [ext_resource type="FontFile" uid="uid://b7eul8pt1rrlc" path="res://Atkinson_Hyperlegible_Next/static/ahln_medium.ttf" id="2_orauc"]
 
 [sub_resource type="GDScript" id="GDScript_5wfv7"]
@@ -25,10 +25,10 @@ func _on_menu_pressed() -> void:
 [node name="failure" type="Node2D" unique_id=1469942541]
 script = SubResource("GDScript_5wfv7")
 
-[node name="CacacaGrey" type="Sprite2D" parent="." unique_id=978015403]
-position = Vector2(899, 506)
-scale = Vector2(274.06247, 152.43748)
-texture = ExtResource("1_mir7q")
+[node name="EbebebGray" type="Sprite2D" parent="." unique_id=651216265]
+position = Vector2(972.50006, 515.00006)
+scale = Vector2(250.62502, 140.49995)
+texture = ExtResource("1_orauc")
 
 [node name="Control" type="Control" parent="." unique_id=89339926]
 layout_mode = 3
@@ -81,7 +81,7 @@ text = "Menu"
 
 [node name="Starship" type="Sprite2D" parent="." unique_id=1978516253]
 texture_filter = 1
-position = Vector2(430.00003, 550)
+position = Vector2(500, 550)
 scale = Vector2(3.75, 3.75)
 texture = ExtResource("1_fi0pi")
 

@@ -17,7 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://pby1h38n4hmm" path="res://media/tower.png" id="13_tdqyt"]
 [ext_resource type="Texture2D" uid="uid://c2lnqqn1f1n6i" path="res://media/chopsticks.png" id="14_qcnq3"]
 [ext_resource type="Texture2D" uid="uid://f1rduu3r0cgh" path="res://media/ground.png" id="15_pivg5"]
-[ext_resource type="AudioStream" uid="uid://cptb471thjitf" path="res://media/raptorRoar.wav" id="16_tns8l"]
+[ext_resource type="AudioStream" uid="uid://dkstmayb6kmqm" path="res://media/raptorIgnition.ogg" id="18_xneng"]
+[ext_resource type="AudioStream" uid="uid://v4wfflyq2qdb" path="res://media/raptorBurn.ogg" id="19_i1xrq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bwct"]
 size = Vector2(35.99968, 3.0000496)
@@ -30,7 +31,7 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rytq"]
-bg_color = Color(0.8666667, 0.8666667, 0.8666667, 1)
+bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -44,7 +45,7 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vjvg7"]
-bg_color = Color(0.8666667, 0.8666667, 0.8666667, 1)
+bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -65,13 +66,13 @@ scale = Vector2(11.387823, -2.9790745)
 texture = ExtResource("1_wijme")
 
 [node name="Starship" type="RigidBody2D" parent="." unique_id=1724685367]
-position = Vector2(-668, -5428)
+position = Vector2(-3990, -10558)
 rotation = 3.1415927
 mass = 150000.0
 inertia = 1000.0
 can_sleep = false
 freeze_mode = 1
-linear_velocity = Vector2(50, 500)
+linear_velocity = Vector2(300, 300)
 script = ExtResource("2_tdqyt")
 
 [node name="EnginePlume1" type="Sprite2D" parent="Starship" unique_id=192035588]
@@ -165,6 +166,7 @@ offset_top = 2.0
 offset_right = 88.0
 offset_bottom = 25.0
 theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+theme_override_font_sizes/font_size = 24
 text = "Propellant"
 
 [node name="Throttle" type="ProgressBar" parent="Telemetry/Control" unique_id=1988183089 node_paths=PackedStringArray("starship")]
@@ -186,15 +188,16 @@ offset_top = 3.0
 offset_right = 89.0
 offset_bottom = 26.0
 theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+theme_override_font_sizes/font_size = 24
 text = "Throttle"
 
-[node name="TelemetryReadOuts" type="Label" parent="Telemetry/Control" unique_id=389722824]
+[node name="TelemetryReadOuts" type="Label" parent="Telemetry/Control" unique_id=507265508]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 439.0
-offset_right = 361.0
-offset_bottom = 462.0
-scale = Vector2(1.5, 1.5)
+offset_right = 530.0
+offset_bottom = 681.0
+theme_override_font_sizes/font_size = 24
 text = "Altitude: Standby for Acquisition of Signal
 Target Offset: Standby for Acquisition of Signal
 Veloctiy: Standby for Acquisition of Signal
@@ -284,8 +287,13 @@ texture = ExtResource("15_pivg5")
 position = Vector2(940, 39)
 shape = SubResource("RectangleShape2D_5wfv7")
 
-[node name="raptorRoar" type="AudioStreamPlayer" parent="." unique_id=1922308602]
-stream = ExtResource("16_tns8l")
+[node name="RaptorIgnition" type="AudioStreamPlayer" parent="." unique_id=1922308602]
+stream = ExtResource("18_xneng")
+mix_target = 2
+
+[node name="RaptorBurn" type="AudioStreamPlayer" parent="." unique_id=2077798921]
+stream = ExtResource("19_i1xrq")
+mix_target = 2
 
 [connection signal="timeout" from="WinEndTimer" to="Starship" method="_on_win_end_timer_timeout"]
 [connection signal="timeout" from="EndTimer" to="Starship" method="_on_end_timer_timeout"]
@@ -295,3 +303,4 @@ stream = ExtResource("16_tns8l")
 [connection signal="area_entered" from="ChopsticksArea" to="Starship" method="_on_chopsticks_area_area_entered"]
 [connection signal="body_entered" from="Bounds" to="Starship" method="_on_bounds_body_entered"]
 [connection signal="body_entered" from="Land" to="Starship" method="_on_land_body_entered"]
+[connection signal="finished" from="RaptorIgnition" to="Starship" method="_on_raptor_ignition_finished"]
