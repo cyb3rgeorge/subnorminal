@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://b7aol8r6p7oef"]
+
+[ext_resource type="Texture2D" uid="uid://dw8wywh6jublf" path="res://media/starship.png" id="1_fi0pi"]
+[ext_resource type="Texture2D" uid="uid://16et33f6t0vg" path="res://media/ebebebGray.png" id="1_orauc"]
+[ext_resource type="FontFile" uid="uid://b7eul8pt1rrlc" path="res://Atkinson_Hyperlegible_Next/ahln_medium.ttf" id="2_orauc"]
+
+[sub_resource type="GDScript" id="GDScript_5wfv7"]
+script/source = "extends Node2D
+
+func _ready():
+	$Control/Anomaly.text = (
+		\"Anomaly: \" + str(Global.anomaly) +
+		\"\\nNorminals: \" + str(Global.norminals) +
+		\"\\nSubnorminals: \" + str(Global.subnorminals)
+	)
+
+
+func _on_restart_pressed() -> void:
+	get_tree().change_scene_to_file(Global.SIMULATOR)
+
+func _on_menu_pressed() -> void:
+	get_tree().change_scene_to_file(Global.MENU)
+"
+
+[node name="failure" type="Node2D" unique_id=1469942541]
+script = SubResource("GDScript_5wfv7")
+
+[node name="EbebebGray" type="Sprite2D" parent="." unique_id=651216265]
+position = Vector2(972.50006, 515.00006)
+scale = Vector2(250.62502, 140.49995)
+texture = ExtResource("1_orauc")
+
+[node name="Control" type="Control" parent="." unique_id=89339926]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 780.0
+offset_top = 200.0
+offset_right = 820.0
+offset_bottom = 240.0
+
+[node name="LoS" type="Label" parent="Control" unique_id=1453258130]
+layout_mode = 0
+offset_left = 134.73447
+offset_top = 82.43558
+offset_right = 745.94836
+offset_bottom = 208.43558
+theme_override_colors/font_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+theme_override_fonts/font = ExtResource("2_orauc")
+theme_override_font_sizes/font_size = 96
+text = "Loss of signal"
+
+[node name="Anomaly" type="Label" parent="Control" unique_id=1034893065]
+layout_mode = 0
+offset_left = 140.94836
+offset_top = 210.95789
+offset_right = 1216.9484
+offset_bottom = 345.9579
+theme_override_colors/font_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+theme_override_font_sizes/font_size = 32
+text = "Anomaly: Unknown
+Norminals: 0
+Subnorminals: 0"
+
+[node name="Restart" type="Button" parent="Control" unique_id=1304027761]
+layout_mode = 0
+offset_left = 140.94836
+offset_top = 506.9579
+offset_right = 292.94836
+offset_bottom = 571.1382
+theme_override_font_sizes/font_size = 32
+text = "Restart"
+
+[node name="Menu" type="Button" parent="Control" unique_id=1063262527]
+layout_mode = 0
+offset_left = 318.94836
+offset_top = 506.9579
+offset_right = 446.94836
+offset_bottom = 571.1382
+theme_override_font_sizes/font_size = 32
+text = "Menu"
+
+[node name="Starship" type="Sprite2D" parent="." unique_id=1978516253]
+texture_filter = 1
+position = Vector2(500, 550)
+scale = Vector2(3.75, 3.75)
+texture = ExtResource("1_fi0pi")
+
+[connection signal="pressed" from="Control/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Control/Menu" to="." method="_on_menu_pressed"]

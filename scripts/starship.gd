@@ -7,51 +7,54 @@ signal propTelemetry
 signal throttleTelemetry
 
 # Ship Configurations
-@export var maxProp : int = 4000
-@export var throttle : float = 0.0
-@export var engines : int = 0
-@export var dryMass : float = 150000.0
+@export var maxProp: int = 4000
+@export var initialPropMass: int = 6000
+@export var throttle: float = 0.0
+@export var engines: int = 0
+@export var dryMass: float = 150000.0
 
 # Failures
-@export var enableRandomFailures : bool = false
-const FAILURE_STAGES := [3, 5, 8, 11, 13, 16]
-var failureThreshold := 21.0
+@export var enableRandomFailures: bool = true
+const FAILURE_STAGES := [2, 4, 6, 8, 10]
+var failureThreshold := 27.0
 
 # CONSTANTS
-const GRAVITATIONAL_ACCELERATION : float = 9.80665 # / m s^-2
-const AIR_DENSITY_MSL : float = 1.2250 # At mean sea level /kg m^-3
-const STARSHIP_HEIGHT : float = 52.0 # /m
-const STARSHIP_DIAMETER : float = 9.0 # /m
-const STARSHIP_BELLY_DRAG_AREA : float = STARSHIP_HEIGHT * STARSHIP_DIAMETER # Assume Starship is a 2-D rectangle /m^2
-const STARSHIP_BELLY_DRAG_COEFFICIENT : float = 1.2 # Assume Starship is a perfect cylinder
-const STARSHIP_CROSS_SECTIONAL_DRAG_AREA : float = PI * (STARSHIP_DIAMETER/2) ** 2
-const STARSHIP_CROSS_SECTIONAL_DRAG_CEFFICIENT : float = 0.82
+const GRAVITATIONAL_ACCELERATION: float = 9.80665 # / m s^-2
+const AIR_DENSITY_MSL: float = 1.2250 # At mean sea level /kg m^-3
+const STARSHIP_HEIGHT: float = 52.1 # /m
+const STARSHIP_DIAMETER: float = 9.0 # /m
+const STARSHIP_BELLY_DRAG_AREA: float = STARSHIP_HEIGHT * STARSHIP_DIAMETER # Assume Starship is a 2-D rectangle /m^2
+const STARSHIP_BELLY_DRAG_COEFFICIENT: float = 1.2 # Assume Starship is a perfect cylinder
+const STARSHIP_CROSS_SECTIONAL_DRAG_AREA: float = PI * (STARSHIP_DIAMETER/2) ** 2
+const STARSHIP_CROSS_SECTIONAL_DRAG_CEFFICIENT: float = 0.82
 
-const TELEMETRY_INTERVAL : float = 0.1
+const TELEMETRY_INTERVAL: float = 0.1
 
 const THROTTLE_CHANGE_RATE: float = 60.0
 const FUEL_BURN_RATE: float = 60.0
 
-const MAX_CATCH_SPEED_MPS: float = 5.0
+const MAX_CATCH_SPEED_MPS: float = 10.0
 
 # Simulation Scale
-const METERS_PER_PIXEL: float = 54.0 / 158.0
-const TARGET_X: float = 1012.0
+const METERS_PER_PIXEL: float = 54.0 / 208.0
+const TARGET_X: float = 1028.0
 const GROUND_Y: float = 1015.0
 
 # Physics
-var power : float = 800000.0
-var angularPower : float = 500.0
+var power: float = 800000.0
+var angularPower: float = 500.0
 var prop: float = 0.0
 var thrust = Vector2.ZERO
-var rotationalDirection : float = 0.0
+var rotationalDirection: float = 0.0
+var previousDelta: float = 0.0
 
 # Internal State
 var randomNumberGenerator = RandomNumberGenerator.new()
-var _finished : bool = false
-var _won: bool = false
-var _telemetryElapsed : float = 0.0
-var _wasBurning : bool = false
+var _finished: bool = false
+var _succeeded: bool = false
+var _telemetryElapsed: float = 0.0
+var _wasBurning: bool = false
+var _lastEngines: int = 0
 
 # Timers
 @onready var FailureStartTimer : Timer = $"../FailureStartTimer"
@@ -60,9 +63,12 @@ var _wasBurning : bool = false
 @onready var WinEndTimer : Timer = $"../WinEndTimer"
 
 # Effects
-@onready var raptorRoar = $"../raptorRoar"
-@onready var flameLow: CanvasItem = $RaptorThrottle1
-@onready var flameHigh: CanvasItem = $RaptorThrottle2
+@onready var raptorIgnition = $"../RaptorIgnition"
+@onready var raptorBurn = $"../RaptorBurn"
+@onready var enginePlume1: CanvasItem = $EnginePlume1
+@onready var enginePlume2: CanvasItem = $EnginePlume2
+@onready var enginePlume3: CanvasItem = $EnginePlume3
+@onready var enginePlume4: CanvasItem = $EnginePlume4
 
 # Telemetry Nodes
 @onready var EngineIndicators: Array[CanvasItem] = [
@@ -71,12 +77,7 @@ var _wasBurning : bool = false
 	$"../Telemetry/2Engines",
 	$"../Telemetry/3Engines"
 ]
-@onready var AltitudeReadOut = $"../Telemetry/Control/Altimeter"
-@onready var TargetOffsetReadOut = $"../Telemetry/Control/TargetOffset"
-@onready var VelocityReadOut = $"../Telemetry/Control/Velocity"
-@onready var SpeedReadOut = $"../Telemetry/Control/Speed"
-@onready var DragForceReadOut = $"../Telemetry/Control/DragForce"
-@onready var AirDensityReadOut = $"../Telemetry/Control/AirDensity"
+@onready var TelemetryReadOuts = $"../Telemetry/Control/TelemetryReadOuts"
 
 
 # Initialization
@@ -85,15 +86,16 @@ func _ready() -> void:
 	gravity_scale = GRAVITATIONAL_ACCELERATION / (980.0 * METERS_PER_PIXEL)
 	
 	throttle = 0.0
+	_lastEngines = engines
 	engines = clampi(engines, 0, 3)
 	
 	prop = float(maxi(maxProp, 0))
-	mass = dryMass
 	
 	_update_engine_indicators()
 	
 	if enableRandomFailures:
 		FailureStartTimer.start()
+		
 
 
 # Input
@@ -132,7 +134,7 @@ func _physics_process (delta):
 	
 	# Propulsion
 	var enginePower := engines * throttle/100
-	var burning := enginePower > 0 and prop >0
+	var burning := enginePower > 0 and prop > 0
 	
 	thrust = Vector2.ZERO
 	
@@ -141,6 +143,9 @@ func _physics_process (delta):
 		prop = maxf(0.0, prop - engines * throttle/100 * FUEL_BURN_RATE *delta)
 		propTelemetry.emit()
 	constant_force = thrust / METERS_PER_PIXEL
+	
+	mass = dryMass + initialPropMass * prop/maxProp
+	var wetMass: float = mass
 	
 	# Flight Data
 	var altitude_m := maxf(0.0, (GROUND_Y - global_position.y) * METERS_PER_PIXEL)
@@ -178,9 +183,15 @@ func _physics_process (delta):
 	var dragForce: Vector2 = Vector2(dragForceX * dragDirectionX, dragForceY * dragDirectionY)
 	apply_central_force(dragForce / METERS_PER_PIXEL)
 	
+	var weight: float = wetMass * GRAVITATIONAL_ACCELERATION
+	var netForce: Vector2 = Vector2(thrust.x + dragForce.x, thrust.y + weight + dragForce.y)
+	#print("Thrust: ", thrust)
+	#print("Weight: ", weight)
+	#print("Net Force: ", netForce)
 	
 	# Rotation
-	constant_torque = rotationalDirection * angularPower * (engines + 1)
+	constant_torque = rotationalDirection * angularPower * (enginePower+1)
+	
 	
 	# Engine Effects
 	_update_effects(burning and prop > 0.0)
@@ -189,9 +200,9 @@ func _physics_process (delta):
 	_telemetryElapsed += delta
 	if _telemetryElapsed >= TELEMETRY_INTERVAL:
 		_telemetryElapsed = 0.0
-		_update_telemetry(altitude_m, targetOffset_m, velocity_mps, dragForce, airDensity)
+		_update_telemetry(altitude_m, targetOffset_m, velocity_mps, dragForce, netForce, airDensity, mass)
 
-	
+
 # Update Engine Indicators
 func _update_engine_indicators() -> void:
 	for i in range(EngineIndicators.size()):
@@ -199,86 +210,120 @@ func _update_engine_indicators() -> void:
 
 
 func _update_effects(burning: bool) -> void:
-	flameLow.visible = burning and throttle <= 50.0
-	flameHigh.visible = burning and throttle > 50.0
+	enginePlume1.visible = burning and throttle > 0.0
+	enginePlume2.visible = burning and throttle > 25.0
+	enginePlume3.visible = burning and throttle > 50.0
+	enginePlume4.visible = burning and throttle > 75.0
 	
-	if burning and not _wasBurning:
-		raptorRoar.play()
-	elif not burning and _wasBurning:
-		raptorRoar.stop()
+	
+	if Global.audio:
+		var enginesIncrease: bool = engines > _lastEngines
 		
-	_wasBurning = burning
-	
+		if burning:
+			if not raptorBurn.playing:
+				raptorBurn.play()
+			if not _wasBurning or enginesIncrease:
+				raptorIgnition.play()
+		elif _wasBurning:
+			raptorIgnition.stop()
+			raptorBurn.stop()
+			
+		_wasBurning = burning
+		_lastEngines = engines
+
+func _on_raptor_ignition_finished() -> void:
+	if _wasBurning:
+		raptorBurn.play()
+
 	
 # Telemetry
-func _update_telemetry(altitude_m: float, targetOffset_m: float, velocity_mps: Vector2, dragForce: Vector2, airDensity: float) -> void:
+func _update_telemetry(altitude_m: float, targetOffset_m: float, velocity_mps: Vector2, dragForce: Vector2, netForce: Vector2, airDensity: float, wetMass: float) -> void:
 	var speed_mps := velocity_mps.length()
 	var dragForce_kn = dragForce/1000.0
+	var netForce_kn = netForce/1000.0
 	
-	AltitudeReadOut.text = "Altitude: %.1f m" % altitude_m
-	TargetOffsetReadOut.text = "Target Offset: %+.1f m" % targetOffset_m
-	VelocityReadOut.text = "Velocity: (%.1f, %.1f) m/s" % [velocity_mps.x, -velocity_mps.y]
-	SpeedReadOut.text = "Speed: %.1f m/s" % speed_mps
-	DragForceReadOut.text = "Drag Force: (%.1f, %.1f) kN" % [dragForce_kn.x, -dragForce_kn.y]
-	AirDensityReadOut.text = "Air Density: %.3f kg/m^3" % [airDensity]
+	TelemetryReadOuts.text = (
+		"Altitude: %.1f m \n" % altitude_m
+		+ "Target Offset: %+.1f m \n" % targetOffset_m
+		+ "Velocity: (%.1f, %.1f) m/s \n" % [velocity_mps.x, -velocity_mps.y]
+		+ "Speed: %.1f m/s \n" % speed_mps
+		+ "Air Density: %.3f kg/m^3 \n" % airDensity
+		+ "Wet Mass: %.0f kg \n" % wetMass
+		+ "Drag Force: (%.1f, %.1f) kN \n" % [dragForce_kn.x, -dragForce_kn.y]
+		+ "Net Force: (%.1f, %.1f) kN" % [netForce_kn.x, -netForce_kn.y]
+	)
+	
+	#print(TelemetryReadOuts.text, "\n//////////")
 	
 	
-# Random Failures
+# Anomalies
 
 func _on_failure_start_timer_timeout() -> void:
 	FailureTimer.start()
 
 func _on_failure_timer_timeout() -> void:
-	failureThreshold = 21.0
-	
 	for stage in FAILURE_STAGES:
-		if Global.failures >= stage:
+		if Global.subnorminals >= stage:
 			failureThreshold += 3.0
+			
 		else:
 			break
 	
 	var failureNumber = randomNumberGenerator.randf_range(0.0, 42.0)
 	
+	#print(Global.subnorminals)
+	#print(failureThreshold)
+	#print(failureNumber)
+	
 	if failureNumber > failureThreshold:
-		Global.failures += 1
-		get_tree().change_scene_to_file(Global.FAILURE_SCENE)
-
-
-func _finish(won: bool, reason: String = "Unknown") -> void:
-	if _finished:
-		return
-	
-	_finished = true
-	_won = won
-
-	set_deferred("freeze", true)
-	
-	if won:
-		WinEndTimer.start()
-	else:
-		Global.failures += 1
-		EndTimer.start()
+		_finish(false, "Rapid Unscheduled Disassembly (RUD)\nRUDs are more likely to occur when Starship has failed \nonly a few times. As the number of failures increase, \nthe probability of RUDs decrease.")
 	
 	
 # Collision Detection
 	
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_land_body_entered(body: Node2D) -> void:
 	if body == self:
-		_finish(false, "Ground collision")
+		_finish(false, "Ground Collision")
 
 func _on_tower_area_body_entered(body: Node2D) -> void:
 	if body == self:
-		_finish(false, "Tower collision")
+		_finish(false, "Tower Collision")
+		
+func _on_bounds_body_entered(body: Node2D) -> void:
+	if body == self:
+		_finish(false, "Flight Terminated: Range Exceeded")
 	
 func _on_chopsticks_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("fwd"):
 		var speed_mps := linear_velocity.length() * METERS_PER_PIXEL
 		if speed_mps < MAX_CATCH_SPEED_MPS:
-			_finish(true, "Chopsticks catch")
+			_finish(true, "Chopsticks Catch")
 		else:
-			_finish(false, "Chopsticks collision")
+			_finish(false, "Chopsticks Collision")
 
 
+# Finish
+
+func _finish(succeeded: bool, anomaly: String = "Unknown") -> void:
+	if _finished:
+		return
+	
+	_finished = true
+	_succeeded = succeeded
+
+	set_deferred("freeze", true)
+	
+	if succeeded:
+		Global.norminals += 1
+		WinEndTimer.start()
+		#print("Success")
+	else:
+		Global.subnorminals += 1
+		EndTimer.start()
+		Global.anomaly = anomaly
+		#print(anomaly)
+		
+		
 # Scene Transitions
 
 func _on_end_timer_timeout() -> void:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bea3r3iojgsco"
-path="res://.godot/imported/landing.jpg-f4af4c47c52ed7dd4d4584e22bc7d98b.ctex"
+uid="uid://16et33f6t0vg"
+path="res://.godot/imported/ebebebGray.png-068f02957e78c3e508b59b65e0a8f2d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://media/landing.jpg"
-dest_files=["res://.godot/imported/landing.jpg-f4af4c47c52ed7dd4d4584e22bc7d98b.ctex"]
+source_file="res://media/ebebebGray.png"
+dest_files=["res://.godot/imported/ebebebGray.png-068f02957e78c3e508b59b65e0a8f2d3.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7ytvixpg1g5q"
-path="res://.godot/imported/jared.png-3cb6da24164a9ccb665e04f253641773.ctex"
+uid="uid://cio2h1f15bwbu"
+path="res://.godot/imported/enginePlume1.png-85295c095c4baa8a97aec062da4675bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://media/jared.png"
-dest_files=["res://.godot/imported/jared.png-3cb6da24164a9ccb665e04f253641773.ctex"]
+source_file="res://media/enginePlume/enginePlume1.png"
+dest_files=["res://.godot/imported/enginePlume1.png-85295c095c4baa8a97aec062da4675bd.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c35cba1wnu00i"
-path="res://.godot/imported/sn8.jpg-87c105f839e71ddb1d43479977ddcc39.ctex"
+uid="uid://04sv8p5id7ai"
+path="res://.godot/imported/enginePlume4.png-4c4df4d57f79f367f73911e0403a7628.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://media/sn8.jpg"
-dest_files=["res://.godot/imported/sn8.jpg-87c105f839e71ddb1d43479977ddcc39.ctex"]
+source_file="res://media/enginePlume/enginePlume4.png"
+dest_files=["res://.godot/imported/enginePlume4.png-4c4df4d57f79f367f73911e0403a7628.ctex"]
 
 [params]
 

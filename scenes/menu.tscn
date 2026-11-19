@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://by7j03igxkmx8"]
+
+[ext_resource type="Script" uid="uid://qf1ergsb8pai" path="res://scripts/menu.gd" id="1_i6lef"]
+[ext_resource type="Texture2D" uid="uid://wf3hc48n7f5q" path="res://media/sky.png" id="2_70i5f"]
+[ext_resource type="FontFile" uid="uid://b7eul8pt1rrlc" path="res://Atkinson_Hyperlegible_Next/ahln_medium.ttf" id="3_mj5lg"]
+[ext_resource type="Texture2D" uid="uid://pby1h38n4hmm" path="res://media/tower.png" id="4_ufwb2"]
+[ext_resource type="Texture2D" uid="uid://c2lnqqn1f1n6i" path="res://media/chopsticks.png" id="5_6cdou"]
+[ext_resource type="Texture2D" uid="uid://04sv8p5id7ai" path="res://media/enginePlume/enginePlume4.png" id="6_i42df"]
+[ext_resource type="Texture2D" uid="uid://dw8wywh6jublf" path="res://media/starship.png" id="7_7jp70"]
+[ext_resource type="AudioStream" uid="uid://ds5un1he0j7nu" path="res://media/audio/Arcadia.mp3" id="8_mxgkd"]
+[ext_resource type="AudioStream" uid="uid://cptb471thjitf" path="res://media/audio/raptorRoar.wav" id="9_g6gyw"]
+
+[node name="Node2D" type="Node2D" unique_id=1357228171]
+position = Vector2(-8, 0)
+rotation = -0.0032296565
+script = ExtResource("1_i6lef")
+
+[node name="Sky" type="Sprite2D" parent="." unique_id=940572232]
+position = Vector2(1606.7239, 395.1114)
+rotation = 3.1415927
+scale = Vector2(0.99819165, -0.2278176)
+texture = ExtResource("2_70i5f")
+
+[node name="Control" type="Control" parent="." unique_id=327519560]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 13.051606
+offset_top = -15.957931
+offset_right = 53.051613
+offset_bottom = 24.042068
+
+[node name="Start" type="Button" parent="Control" unique_id=394313050]
+layout_mode = 0
+offset_left = 140.12602
+offset_top = 580.4555
+offset_right = 396.44574
+offset_bottom = 644.6358
+theme_override_font_sizes/font_size = 32
+text = "Initiate Mission"
+
+[node name="Title" type="Label" parent="Control" unique_id=49176561]
+layout_mode = 0
+offset_left = 134.73447
+offset_top = 82.43557
+offset_right = 1207.7345
+offset_bottom = 332.43558
+theme_override_fonts/font = ExtResource("3_mj5lg")
+theme_override_font_sizes/font_size = 192
+text = "Subnorminal"
+
+[node name="Caption" type="Label" parent="Control" unique_id=683957140]
+layout_mode = 0
+offset_left = 140.09497
+offset_top = 280.45392
+offset_right = 1216.095
+offset_bottom = 341.45392
+theme_override_colors/font_color = Color(0.7921569, 0.7921569, 0.7921569, 1)
+theme_override_font_sizes/font_size = 46
+text = "Catching a Pencil Falling from Space with Chopsticks"
+
+[node name="Counter" type="Label" parent="Control" unique_id=1751051549]
+layout_mode = 0
+offset_left = 145.50714
+offset_top = 462.47232
+offset_right = 376.50714
+offset_bottom = 548.4723
+theme_override_colors/font_color = Color(0.7921569, 0.7921569, 0.7921569, 1)
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 32
+text = "Norminals: 0
+Subnorminals: 0"
+
+[node name="Mute" type="Button" parent="Control" unique_id=2102189227]
+layout_mode = 0
+offset_left = 140.76955
+offset_top = 1000.4601
+offset_right = 280.9414
+offset_bottom = 1030.8708
+theme_override_font_sizes/font_size = 16
+text = "Mute All Audio
+"
+
+[node name="Tower" type="Sprite2D" parent="." unique_id=284238409]
+texture_filter = 1
+position = Vector2(702.50183, 1084.2744)
+rotation = -0.0031085322
+scale = Vector2(2.4234447, 2.4234447)
+texture = ExtResource("4_ufwb2")
+
+[node name="Chopsticks" type="Sprite2D" parent="Tower" unique_id=631135357]
+texture_filter = 1
+position = Vector2(65.42119, -203.78424)
+texture = ExtResource("5_6cdou")
+
+[node name="EnginePlume4" type="Sprite2D" parent="." unique_id=1618626536]
+texture_filter = 1
+position = Vector2(1714.2295, 860.5406)
+rotation = -2.2848809
+scale = Vector2(2.4197586, 2.4197586)
+texture = ExtResource("6_i42df")
+
+[node name="Area2D" type="Area2D" parent="EnginePlume4" unique_id=694687291]
+position = Vector2(178.74347, 18.273438)
+rotation = 1.7612823
+scale = Vector2(1.0000002, 1.0000002)
+
+[node name="Starship" type="Sprite2D" parent="EnginePlume4/Area2D" unique_id=1682265936]
+texture_filter = 1
+position = Vector2(-6.1035156e-05, -9.1552734e-05)
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("7_7jp70")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="EnginePlume4/Area2D" unique_id=1716067711]
+polygon = PackedVector2Array(1.3582458, -103.433655, 27.574066, -72.88599, 28.062286, -63.04016, 17.859283, -62.759735, 17.87851, 48.168457, 33.136963, 70.43027, 33.803253, 103.80609, -33.812225, 104.15802, -34.270752, 70.42502, -17.582306, 46.66577, -17.926025, -62.0607, -27.921234, -62.13748, -27.993927, -72.697754, -1.7657166, -103.8165)
+
+[node name="menuMusic" type="AudioStreamPlayer" parent="." unique_id=883319262]
+stream = ExtResource("8_mxgkd")
+autoplay = true
+parameters/looping = true
+
+[node name="raptorRoar" type="AudioStreamPlayer" parent="." unique_id=1475135712]
+stream = ExtResource("9_g6gyw")
+
+[connection signal="pressed" from="Control/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Control/Mute" to="." method="_on_mute_pressed"]
+[connection signal="input_event" from="EnginePlume4/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="finished" from="raptorRoar" to="." method="_on_raptor_roar_finished"]
