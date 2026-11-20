@@ -5,6 +5,8 @@ With realistic physics!
 
 Find us on itch.io! https://cyb3rgeorge.itch.io/subnorminal
 
+![Subnorminal Promo Art featuring Starship maneuvering into the chopsticks](mediaKit/promoArt/subnorminalBanner1920-1080.png)
+
 ## Features & Mechanics
 1. Propulsion system
 2. Flight controls (throttle, pitch, engine selection)
@@ -73,6 +75,8 @@ If all three conditions are _not_ met, no thrust will be produced.
 | S | Throttle down |
 | A | Pitch up |
 | D| Pitch down |
+
+![Starship side view](mediaKit/starshipSide.png)
 
 ## Attribution & Licenses
 Credits to George's 48 hours of sleep deprivation (and further locking in after the hackathon). \
