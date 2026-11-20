@@ -76,7 +76,11 @@ If all three conditions are _not_ met, no thrust will be produced.
 | A | Pitch up |
 | D| Pitch down |
 
-![Starship side view](mediaKit/starshipSide.png)
+![Screenshot of Starship in free fall](mediaKit/screenshots/freeFall.png)
+
+![Screenshot of Starship being caught by the chopsticks](mediaKit/screenshots/inChopsticks.png)
+
+![Screenshot of the end screen after a RUD](mediaKit/screenshots/endScreen.png)
 
 ## Attribution & Licenses
 Credits to George's 48 hours of sleep deprivation (and further locking in after the hackathon). \
