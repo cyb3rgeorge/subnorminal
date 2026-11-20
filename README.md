@@ -3,7 +3,7 @@ Inspired by the journey of humanity to earn our place among the stars, we start 
 
 With realistic physics!
 
-Find us on itch.io! https://cyb3rgeorge.itch.io/subnorminal
+Play on itch.io! https://cyb3rgeorge.itch.io/subnorminal
 
 ![Subnorminal Promo Art featuring Starship maneuvering into the chopsticks](mediaKit/promoArt/subnorminalBanner1920-1080.png)
 
